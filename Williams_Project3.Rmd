@@ -1,0 +1,68 @@
+---
+title: 'DATA607: Project 3'
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+# Load Libraries
+```{r}
+library(dplyr)
+library(stringr)
+library(rvest)
+library(DT)
+library("tm")
+library("SnowballC")
+library("RColorBrewer")
+library("wordcloud")
+```
+# Web Scrape Indeed.com for Data Scientist Job Vacancies
+```{r}
+indeed <- data.frame(summary=character(),stringsAsFactors=FALSE) 
+for (i in seq(0, 990, 10)){
+  url <- paste0('https://www.indeed.com/jobs?q=data+scientist&l=all&start=',i)
+  file <- read_html(url)
+  #summary
+  summary <- file %>%
+    html_nodes('#resultsCol .summary') %>%
+    html_text() %>%
+    str_extract(".+")
+indeed <- rbind(indeed, as.data.frame(cbind(summary)))
+}
+```
+# Transform Data
+```{r}
+# data <- write.table(file, file = 'indeed.txt', sep = ",")
+file <- "https://raw.githubusercontent.com/jambawilliams/DATA607Project3/master/indeed.txt"
+text <- readLines(file)
+docs <- Corpus(VectorSource(text))
+```
+# Condition Data
+```{r}
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, removeWords, stopwords("english"))
+docs <- tm_map(docs, removeWords, c("data", "experience", "science", "predictive", "will", "including", "machine", "analytics", "technique", "advanced", "team", "understanding", "tools", "deep", "techniques", "decision", "work", "engineering", "forests", "modern", "trees", "glms", "years", "boosted...", "variety", "boosted", "seen", "software", "roles", "models", "closely", "statistical", "senior", "experts", "working", "engineer", "leverage", "learning", "scientific", "project", "domain", "scientists", "iquartic", "ocr", "use", "one", "etc", "insights", "scientist", "trends"))
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m), decreasing = TRUE)
+d <- data.frame(word = names(v), freq=v)
+d
+```
+# Visualize Data
+```{r}
+set.seed(1234)
+wordcloud(words = d$word, freq=d$freq, min.freq = 50, max.words=200, random.order=FALSE, rot.per=0.35, colors=brewer.pal(8, "Dark2"))
+```
+```{r}
+barplot(d[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
+        col ="lightblue", main ="Most frequent words",
+        ylab = "Word frequencies")
+```
