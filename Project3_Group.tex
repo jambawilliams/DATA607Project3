@@ -1,0 +1,3264 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={DATA 607: Project 3},
+            pdfauthor={Michael Munguia, Keshaw Sahay, James Williams \& Chunsan Yip},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\title{DATA 607: Project 3}
+\author{Michael Munguia, Keshaw Sahay, James Williams \& Chunsan Yip}
+\date{3/22/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The project goal was to gather and explore data revolving around the
+necessary job skills for a data scientist in today's job market. As a
+group, we discussed potential avenues for data collection via slack and
+based on availabilities and time constraints, executed the most readily
+accessible strategies. Unlike a real-world work scenario, we do not have
+most of our waking hours to dedicate to this, so we had to operate
+quickly and efficiently to deliver.
+
+\hypertarget{overall-process}{%
+\section{Overall Process}\label{overall-process}}
+
+There was no single process for gathering the data, but we focused on
+three main sources of data: job postings from NYC's various government
+agencies, articles written about the important skills needed by a data
+scientist and survey responses regarding data science working skills.
+The process for gathering data was two fold: mining data files for the
+job posts and survey results along with manual collection for the
+articles.
+
+\hypertarget{data-gathering-exploration}{%
+\section{Data gathering \&
+exploration}\label{data-gathering-exploration}}
+
+\hypertarget{nyc-open-data-job-postings}{%
+\subsection{NYC Open Data: Job
+Postings}\label{nyc-open-data-job-postings}}
+
+\hypertarget{function-writing}{%
+\subsubsection{Function writing}\label{function-writing}}
+
+Creating a few custom functions, the process for collecting and
+processing data from job descriptions posted onto the city's job post
+mechanism boiled down to reading a CSV and tokenizing the two columns
+dictating required and preferred skills such that we break each text
+document down into its constituent words. The text needed to be cleaned
+to standardize the words across descriptions such that artificially
+distinct words were not created as a result of things like special
+characters, punctuation, whitespace or capitalization. The cleaning
+process is managed by the \texttt{clean\_description} function and
+tokenization was handled by the \texttt{tidytext::unnest\_tokens}
+function. Once cleaned and tokenized, the text data was passed to the
+\texttt{word\_frequency} function to remove any stop words, including a
+special list created by iteratively evaluating the results, and
+ultimately generate counts for each word in the overall corpus of
+description texts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidytext)}
+\NormalTok{clean_description <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(text) \{}
+\NormalTok{  text <-}\StringTok{ }\NormalTok{text }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{iconv}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"ASCII"}\NormalTok{, }\StringTok{"byte"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_remove_all}\NormalTok{(}\StringTok{"<.+>|}\CharTok{\textbackslash{}t}\StringTok{|}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d|[:punct:]"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_trim}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_to_lower}\NormalTok{()}
+  
+  \KeywordTok{return}\NormalTok{(text)}
+\NormalTok{\}}
+\NormalTok{word_frequency <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, }\DataTypeTok{addl_stopwords =} \OtherTok{NA}\NormalTok{) \{}
+\NormalTok{  stop_words <-}\StringTok{ }\KeywordTok{get_stopwords}\NormalTok{()}
+  \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{is.character}\NormalTok{(addl_stopwords)) \{}
+\NormalTok{    stop_words <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(stop_words,}
+                            \KeywordTok{tibble}\NormalTok{(}\DataTypeTok{word =}\NormalTok{ addl_stopwords,}
+                                   \DataTypeTok{lexicon =} \KeywordTok{rep}\NormalTok{(}\StringTok{"user defined"}\NormalTok{,}
+                                                 \KeywordTok{length}\NormalTok{(addl_stopwords)}
+\NormalTok{                                   )}
+\NormalTok{                            )}
+\NormalTok{    )}
+\NormalTok{  \}}
+      
+\NormalTok{  df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{anti_join}\NormalTok{(stop_words, }\DataTypeTok{by =} \StringTok{"word"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(word, }\DataTypeTok{sort =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{unnest_wrapper <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, target_var, }\DataTypeTok{word_var =} \StringTok{"word"}\NormalTok{) \{}
+\NormalTok{  df }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{unnest_tokens_}\NormalTok{(word_var, target_var) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{select}\NormalTok{(title_id, category_id, word)}
+\NormalTok{\}}
+\NormalTok{word_plot <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, }\DataTypeTok{addl_stopwords =} \OtherTok{NA}\NormalTok{, }\DataTypeTok{top_n =} \DecValTok{10}\NormalTok{,}
+                      \DataTypeTok{title_lab =} \StringTok{"Job Posting"}\NormalTok{,}
+                      \DataTypeTok{x_lab =} \StringTok{"Words in Text"}\NormalTok{, }\DataTypeTok{y_lab =} \StringTok{"Frequency"}\NormalTok{,}
+                      \DataTypeTok{fill_color =} \StringTok{"gray"}\NormalTok{) \{}
+\NormalTok{  top_df <-}\StringTok{ }\KeywordTok{word_frequency}\NormalTok{(df, addl_stopwords) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(top_n)}
+\NormalTok{  word_order <-}\StringTok{ }\NormalTok{top_df}\OperatorTok{$}\NormalTok{word}
+\NormalTok{  top_df <-}\StringTok{ }\NormalTok{top_df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_at}\NormalTok{(}\StringTok{"word"}\NormalTok{, factor, }\DataTypeTok{ordered =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{levels =}\NormalTok{ word_order)}
+  
+\NormalTok{  result_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(top_df, }\KeywordTok{aes}\NormalTok{(word, n)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ fill_color) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =}\NormalTok{ title_lab, }\DataTypeTok{x =}\NormalTok{ x_lab, }\DataTypeTok{y =}\NormalTok{ y_lab)}
+  
+  \ControlFlowTok{if}\NormalTok{ (top_n }\OperatorTok{<}\StringTok{ }\DecValTok{11}\NormalTok{) \{}
+    \KeywordTok{return}\NormalTok{(result_plot)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{return}\NormalTok{(result_plot }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{())}
+\NormalTok{  \}}
+  
+\NormalTok{\}}
+\CommentTok{# These are additional stopwords that appear to be noise in the greater scheme}
+\CommentTok{# of what we're trying to do (i.e. extract meaningful words from job postings)}
+\NormalTok{jobpost_stopwords <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"experience"}\NormalTok{, }\StringTok{"years"}\NormalTok{, }\StringTok{"accredited"}\NormalTok{, }\StringTok{"college"}\NormalTok{, }\StringTok{"degree"}\NormalTok{,}
+                       \StringTok{"field"}\NormalTok{, }\StringTok{"equivalent"}\NormalTok{, }\StringTok{"appropriate"}\NormalTok{, }\StringTok{"education"}\NormalTok{,}
+                       \StringTok{"specialization"}\NormalTok{, }\StringTok{"described"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"ability"}\NormalTok{,}
+                       \StringTok{"skills"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"strong"}\NormalTok{, }\StringTok{"work"}\NormalTok{, }\StringTok{"working"}\NormalTok{, }\StringTok{"well"}\NormalTok{,}
+                       \StringTok{"must"}\NormalTok{, }\StringTok{"candidate"}\NormalTok{, }\StringTok{"candidates"}\NormalTok{, }\StringTok{"university"}\NormalTok{, }\StringTok{"least"}\NormalTok{,}
+                       \StringTok{"community"}\NormalTok{, }\StringTok{"fulltime"}\NormalTok{, }\StringTok{"school"}\NormalTok{, }\StringTok{"andor"}\NormalTok{, }\StringTok{"one"}\NormalTok{, }\StringTok{"two"}\NormalTok{,}
+                       \StringTok{"three"}\NormalTok{, }\StringTok{"four"}\NormalTok{, }\StringTok{"five"}\NormalTok{, }\StringTok{"six"}\NormalTok{, }\StringTok{"seven"}\NormalTok{, }\StringTok{"eight"}\NormalTok{, }\StringTok{"nine"}\NormalTok{,}
+                       \StringTok{"ten"}\NormalTok{, }\StringTok{"high"}\NormalTok{, }\StringTok{"level"}\NormalTok{, }\StringTok{"area"}\NormalTok{, }\StringTok{"related"}\NormalTok{, }\StringTok{"however"}\NormalTok{,}
+                       \StringTok{"satisfactory"}\NormalTok{, }\StringTok{"assignment"}\NormalTok{, }\StringTok{"public"}\NormalTok{, }\StringTok{"duties"}\NormalTok{, }\StringTok{"social"}\NormalTok{,}
+                       \StringTok{"activities"}\NormalTok{, }\StringTok{"centered"}\NormalTok{, }\StringTok{"responsible"}\NormalTok{, }\StringTok{"diploma"}\NormalTok{, }\StringTok{"period"}\NormalTok{,}
+                       \StringTok{"probationary"}\NormalTok{, }\StringTok{"substituted"}\NormalTok{, }\StringTok{"accrediting"}\NormalTok{, }\StringTok{"graduation"}\NormalTok{,}
+                       \StringTok{"recognized"}\NormalTok{, }\StringTok{"approved"}\NormalTok{, }\StringTok{"fouryear"}\NormalTok{, }\StringTok{"note"}\NormalTok{, }\StringTok{"required"}\NormalTok{,}
+                       \StringTok{"capacity"}\NormalTok{, }\StringTok{"department"}\NormalTok{, }\StringTok{"development"}\NormalTok{, }\StringTok{"organization"}\NormalTok{,}
+                       \StringTok{"states"}\NormalTok{, }\StringTok{"credits"}\NormalTok{, }\StringTok{"ii"}\NormalTok{, }\StringTok{"appointed"}\NormalTok{, }\StringTok{"appointments"}\NormalTok{,}
+                       \StringTok{"program"}\NormalTok{, }\StringTok{"position"}\NormalTok{, }\StringTok{"can"}\NormalTok{, }\StringTok{"combination"}\NormalTok{, }\StringTok{"may"}\NormalTok{,}
+                       \StringTok{"subject"}\NormalTok{, }\StringTok{"including"}\NormalTok{, }\StringTok{"semester"}\NormalTok{, }\StringTok{"appointment"}\NormalTok{, }\StringTok{"basis"}\NormalTok{,}
+                       \StringTok{"graduate"}\NormalTok{, }\StringTok{"acquired"}\NormalTok{, }\StringTok{"made"}\NormalTok{, }\StringTok{"major"}\NormalTok{, }\StringTok{"requirements"}\NormalTok{,}
+                       \StringTok{"use"}\NormalTok{, }\StringTok{"agencies"}\NormalTok{, }\StringTok{"areas"}\NormalTok{, }\StringTok{"bodies"}\NormalTok{, }\StringTok{"chea"}\NormalTok{, }\StringTok{"council"}\NormalTok{,}
+                       \StringTok{"estate"}\NormalTok{, }\StringTok{"following"}\NormalTok{, }\StringTok{"hire"}\NormalTok{, }\StringTok{"june"}\NormalTok{, }\StringTok{"meeting"}\NormalTok{, }\StringTok{"past"}\NormalTok{,}
+                       \StringTok{"real"}\NormalTok{, }\StringTok{"promotion"}\NormalTok{, }\StringTok{"primarily"}\NormalTok{, }\StringTok{"plus"}\NormalTok{, }\StringTok{"us"}\NormalTok{, }\StringTok{"using"}\NormalTok{,}
+                       \StringTok{"user"}\NormalTok{, }\StringTok{"valid"}\NormalTok{, }\StringTok{"additional"}\NormalTok{, }\StringTok{"august"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{, }\StringTok{"base"}\NormalTok{,}
+                       \StringTok{"eligible"}\NormalTok{, }\StringTok{"employee"}\NormalTok{, }\StringTok{"employment"}\NormalTok{, }\StringTok{"end"}\NormalTok{, }\StringTok{"fields"}\NormalTok{,}
+                       \StringTok{"fifteen"}\NormalTok{, }\StringTok{"general"}\NormalTok{, }\StringTok{"held"}\NormalTok{, }\StringTok{"paid"}\NormalTok{, }\StringTok{"possess"}\NormalTok{,}
+                       \StringTok{"prospective"}\NormalTok{, }\StringTok{"qualification"}\NormalTok{, }\StringTok{"recent"}\NormalTok{, }\StringTok{"winterspring"}\NormalTok{,}
+                       \StringTok{"within"}\NormalTok{, }\StringTok{"without"}\NormalTok{, }\StringTok{"yearforyear"}\NormalTok{, }\StringTok{"oror"}\NormalTok{, }\StringTok{"post"}\NormalTok{, }\StringTok{"agency"}\NormalTok{,}
+                       \StringTok{"city"}\NormalTok{, }\StringTok{"minimum"}\NormalTok{, }\StringTok{"months"}\NormalTok{, }\StringTok{"new"}\NormalTok{, }\StringTok{"york"}\NormalTok{, }\StringTok{"large"}\NormalTok{, }\StringTok{"highly"}\NormalTok{,}
+                       \StringTok{"desired"}\NormalTok{, }\StringTok{"able"}\NormalTok{, }\StringTok{"interest"}\NormalTok{, }\StringTok{"part"}\NormalTok{, }\StringTok{"etc"}\NormalTok{, }\StringTok{"strongly"}\NormalTok{,}
+                       \StringTok{"time"}\NormalTok{, }\StringTok{"prefer"}\NormalTok{, }\StringTok{"preference"}\NormalTok{, }\StringTok{"nyc"}\NormalTok{, }\StringTok{"environment"}\NormalTok{,}
+                       \StringTok{"excellent"}\NormalTok{, }\StringTok{"familiarity"}\NormalTok{, }\StringTok{"demonstrated"}\NormalTok{, }\StringTok{"computer"}\NormalTok{,}
+                       \StringTok{"administration"}\NormalTok{, }\StringTok{"administrative"}\NormalTok{, }\StringTok{"tasks"}\NormalTok{, }\StringTok{"student"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-wrangling}{%
+\subsubsection{Data wrangling}\label{data-wrangling}}
+
+After loading the \texttt{tidytext} library and defining my custom
+functions, the data is loaded and run through the process described
+above. Additionally, unique identifiers are created for both the job
+titles and categories listed in the job posts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jobs <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(nyc_jobs) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\StringTok{"title"}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Business Title}\StringTok{`}\NormalTok{, }\StringTok{"category"}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Job Category}\StringTok{`}\NormalTok{,}
+         \StringTok{"requirements"}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Minimum Qual Requirements}\StringTok{`}\NormalTok{,}
+         \StringTok{"preferences"}\NormalTok{ =}\StringTok{ `}\DataTypeTok{Preferred Skills}\StringTok{`}\NormalTok{)}
+\NormalTok{data_jobs <-}\StringTok{ }\NormalTok{jobs }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(title, }\KeywordTok{regex}\NormalTok{(}\StringTok{"data"}\NormalTok{,}\DataTypeTok{ignore_case =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{&}
+\StringTok{           }\KeywordTok{str_detect}\NormalTok{(title, }\KeywordTok{regex}\NormalTok{(}\StringTok{"analyst|scientist|engineer"}\NormalTok{, }\DataTypeTok{ignore_case =} \OtherTok{TRUE}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"requirements"}\NormalTok{, }\StringTok{"preferences"}\NormalTok{), clean_description)}
+\NormalTok{title_ids <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_indices}\NormalTok{(title)}
+\NormalTok{category_ids <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_indices}\NormalTok{(category)}
+\NormalTok{data_jobs}\OperatorTok{$}\NormalTok{title_id <-}\StringTok{ }\NormalTok{title_ids}
+\NormalTok{data_jobs}\OperatorTok{$}\NormalTok{category_id <-}\StringTok{ }\NormalTok{category_ids}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{putting-it-all-together}{%
+\subsubsection{Putting it all together}\label{putting-it-all-together}}
+
+With unique identifiers in hand, separate dataframes are established for
+later normalized SQL table creation. In essence: \texttt{title\_table}
+for job titles, \texttt{category\_table} for departmental categories and
+\texttt{job\_requirements} for required skills and
+\texttt{job\_preferences} for preferred skills. The primary key linking
+these all will be the unique \texttt{title\_id} and/or
+\texttt{category\_id}. This leaves room open later on to further
+standardize the job titles such that departmental information could be
+extracted from the titles themselves if we eventually wanted to dissect
+job skills for data analysts versus data scientists, senior positions
+versus junior positions, etc.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(title_table <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(title_id, title))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 2
+##    title_id title                                                   
+##       <int> <chr>                                                   
+##  1        3 Data Analyst                                            
+##  2       14 Senior Data Analyst M/WBE, Enterprise Data Services     
+##  3        7 Data Scientist                                          
+##  4        4 Data Analyst, Bureau of HIV                             
+##  5       10 NYC Census 2020 - Community Outreach Data Analyst       
+##  6        6 Data Analyst, PNA                                       
+##  7       12 Policy Analyst - Data                                   
+##  8        8 Data Support Analyst                                    
+##  9       13 Program Data Analyst                                    
+## 10        1 2020-BWS-014-Reservoir Ops Associate Data Analyst Intern
+## 11       11 Policy Analyst  - Data and Technology                   
+## 12        5 DATA ANALYST, BUSINESS OPERATIONS                       
+## 13        9 HRIS Data Analyst                                       
+## 14        2 Business and Data Analyst Manager
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(category_table <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(category_id, category))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 13 x 2
+##    category_id category                                                         
+##          <int> <chr>                                                            
+##  1           5 Finance, Accounting, & Procurement Technology, Data & Innovation~
+##  2          11 Technology, Data & Innovation                                    
+##  3           9 Policy, Research & Analysis Public Safety, Inspections, & Enforc~
+##  4           8 Policy, Research & Analysis                                      
+##  5           6 Health                                                           
+##  6           1 Constituent Services & Community Programs                        
+##  7          12 Technology, Data & Innovation Legal Affairs Policy, Research & A~
+##  8           3 Engineering, Architecture, & Planning                            
+##  9           2 Constituent Services & Community Programs Technology, Data & Inn~
+## 10          13 Technology, Data & Innovation Policy, Research & Analysis        
+## 11          10 Public Safety, Inspections, & Enforcement                        
+## 12           7 Legal Affairs Policy, Research & Analysis                        
+## 13           4 Finance, Accounting, & Procurement
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_jobs <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(title_id, category_id, requirements, preferences)}
+\NormalTok{(job_requirements <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unnest_wrapper}\NormalTok{(}\StringTok{"requirements"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,948 x 3
+##    title_id category_id word      
+##       <int>       <int> <chr>     
+##  1        3           5 a         
+##  2        3           5 masters   
+##  3        3           5 degree    
+##  4        3           5 from      
+##  5        3           5 an        
+##  6        3           5 accredited
+##  7        3           5 college   
+##  8        3           5 or        
+##  9        3           5 university
+## 10        3           5 accredited
+## # ... with 2,938 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(job_preferences <-}\StringTok{ }\NormalTok{data_jobs }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unnest_wrapper}\NormalTok{(}\StringTok{"preferences"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,238 x 3
+##    title_id category_id word          
+##       <int>       <int> <chr>         
+##  1        3           5 experience    
+##  2        3           5 position      
+##  3        3           5 qualifications
+##  4        3           5 commitment    
+##  5        3           5 applicants    
+##  6        3           5 must          
+##  7        3           5 be            
+##  8        3           5 in            
+##  9        3           5 the           
+## 10        3           5 title         
+## # ... with 1,228 more rows
+\end{verbatim}
+
+\hypertarget{database-interlude-i}{%
+\subsubsection{Database interlude I}\label{database-interlude-i}}
+
+Writing the tables above as CSV Files, normalized tables were created
+and populated via the PGAdmin 4 GUI. Alternatively, a backup file is
+included in
+\includegraphics{https://github.com/mijomu/DATA-607/tree/master/Project\%203}.
+To load the data back into R, a process like below could be followed.
+For reproducibility, I maintained the dataframes created thus far, but
+if one were to instantiate the database via the backup file and load
+accordingly the results will be the same.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(DBI)}
+\KeywordTok{library}\NormalTok{(odbc)}
+\NormalTok{connection <-}\StringTok{ }\KeywordTok{dbConnect}\NormalTok{(RPostgres}\OperatorTok{::}\KeywordTok{Postgres}\NormalTok{(), }\DataTypeTok{dbname =}\NormalTok{ params}\OperatorTok{$}\NormalTok{db_name,}
+                        \DataTypeTok{host =}\NormalTok{ params}\OperatorTok{$}\NormalTok{host, }\DataTypeTok{user =}\NormalTok{ params}\OperatorTok{$}\NormalTok{user, }\DataTypeTok{password =}\NormalTok{ params}\OperatorTok{$}\NormalTok{pwd)}
+\NormalTok{read_db_tbl <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(conx, select_statement) \{}
+  \KeywordTok{as.tbl}\NormalTok{(}\KeywordTok{dbGetQuery}\NormalTok{(}\DataTypeTok{conn =}\NormalTok{ conx, }\DataTypeTok{statement =}\NormalTok{ select_statement))}
+\NormalTok{\}}
+\NormalTok{title_table <-}\StringTok{ }\KeywordTok{read_db_tbl}\NormalTok{(connection, }\StringTok{"SELECT * FROM title_table"}\NormalTok{)}
+\NormalTok{category_table <-}\StringTok{ }\KeywordTok{read_db_tbl}\NormalTok{(connection, }\StringTok{"SELECT * FROM category_table"}\NormalTok{)}
+\NormalTok{job_requirements <-}\StringTok{ }\KeywordTok{read_db_tbl}\NormalTok{(connection, }\StringTok{"SELECT * FROM job_requirements"}\NormalTok{)}
+\NormalTok{job_preferences <-}\StringTok{ }\KeywordTok{read_db_tbl}\NormalTok{(connection, }\StringTok{"SELECT * FROM job_preferences"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analysis}{%
+\subsubsection{Analysis}\label{analysis}}
+
+The top twenty most frequent words that appear in required job skills
+are below. More work is required here to adequately parse descriptions,
+but we can get a handle on the fact that most required skills revolve
+around having a more scientific background - words like research,
+biological, environmental and both masters and baccalaureate round out
+the top ten along with words like management and professional. We can
+glean from this that, at least as far as the city of New York is
+concerned, they are looking to hire data specialists with a higher
+degree of education than not. A research background in one of the
+sciences may give a potential applicant an edge over the competition.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{word_plot}\NormalTok{(job_requirements, jobpost_stopwords, }\DecValTok{20}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Required Job Skills"}\NormalTok{, }\DataTypeTok{fill_color =} \StringTok{"gray"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Project3_Group_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Likewise, we can see preferred job skills below. It is interesting to me
+that no language indicating any specific tools appears above, but we do
+see plenty of them below. Surprisingly, elements of the Microsoft Office
+suite are important: we see Excel appearing prominently as second most
+referenced word in preferred skills for these jobs. It is tied with a
+reference to ``team'', likely indicating being able to work on a team is
+highly valued along with the top preferred skill: communication. While a
+higher educational background may get one in the door, collaborative
+skills seem to be much more important. Certainly, we see references to
+analysis, software and (programming) languages but half of the top
+twenty refer to some kind of human-facing skill that we might not
+immediately think of in the wizardly world of data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{word_plot}\NormalTok{(job_preferences, jobpost_stopwords, }\DecValTok{20}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Preferred Job Skills"}\NormalTok{,}
+          \DataTypeTok{fill_color =} \StringTok{"salmon"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Project3_Group_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\hypertarget{article-skill-lists}{%
+\subsection{Article Skill Lists}\label{article-skill-lists}}
+
+Another avenue was collecting skills described by online articles set to
+highlight the most important data science skills. In this case, 10
+articles were reviewed and data was manually collected into a CSV file.
+
+\hypertarget{data-loading-database-interlude-ii}{%
+\subsubsection{Data loading / Database Interlude
+II}\label{data-loading-database-interlude-ii}}
+
+Again, for ease of reproducibility, the data will be read from a CSV
+file. In the comments, however, would be how to load the data given the
+same connection as before. The rest of the process remains the same.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skills <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(vs_file, }\DataTypeTok{skip=}\DecValTok{2}\NormalTok{)}
+\CommentTok{# skills <- read_db_tbl(connection, "SELECT * FROM valued_skills")}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-wrangling-1}{%
+\subsubsection{Data wrangling}\label{data-wrangling-1}}
+
+The data is manipulated into a workable dataframe below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a<-}\KeywordTok{max}\NormalTok{(}\KeywordTok{str_count}\NormalTok{(skills}\OperatorTok{$}\NormalTok{Skill, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s"}\NormalTok{))}
+\NormalTok{i=}\DecValTok{1}
+\NormalTok{newCol <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{(a}\OperatorTok{+}\DecValTok{1}\NormalTok{)) \{}
+\NormalTok{  newCol[i] <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{(i)}
+\NormalTok{\}}
+\NormalTok{newSkills <-}\StringTok{ }\NormalTok{skills }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(Skill, }\DataTypeTok{into =}\NormalTok{ newCol, }\DataTypeTok{sep=}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s"}\NormalTok{, }\DataTypeTok{fill=}\StringTok{"right"}\NormalTok{)}\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key=}\StringTok{"nCol"}\NormalTok{, }\DataTypeTok{value=}\StringTok{"nSkill"}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{9}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{nSkill =} \KeywordTok{str_to_lower}\NormalTok{(nSkill)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{nSkill =} \KeywordTok{str_replace}\NormalTok{(nSkill, }\StringTok{"[ ,?:]"}\NormalTok{, }\StringTok{""}\NormalTok{) ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(nSkill)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(nSkill)) }
+\CommentTok{# Machine and Learning are actually linked together after reviewing the csv file again}
+\NormalTok{gskills <-}\StringTok{ }\NormalTok{newSkills }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{nSkill =} \KeywordTok{if_else}\NormalTok{(nSkill }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"machine"}\NormalTok{, }\StringTok{"learning"}\NormalTok{), }\StringTok{"machine learning"}\NormalTok{, nSkill)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(nSkill)}\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{n}\NormalTok{())}\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(n))}
+\NormalTok{gskills}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 92 x 2
+##    nSkill               n
+##    <chr>            <int>
+##  1 machine learning    18
+##  2 data                13
+##  3 programming          9
+##  4 communication        7
+##  5 sql                  7
+##  6 and                  6
+##  7 &                    5
+##  8 python               5
+##  9 r                    5
+## 10 skills               5
+## # ... with 82 more rows
+\end{verbatim}
+
+\hypertarget{results}{%
+\subsubsection{Results}\label{results}}
+
+The top five skills should be ``Data'' (including data analysis, data
+visualization, etc.), ``Machine Learning'', ``Programming'',
+``Communication'' and ``SQL''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{(gskills[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,])) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{fct_reorder}\NormalTok{(nSkill, n), }\DataTypeTok{y =}\NormalTok{ n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Most Referenced Skills"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Frequency"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Job Skills"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Project3_Group_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\hypertarget{survey-data}{%
+\subsection{Survey Data}\label{survey-data}}
+
+\hypertarget{data-acquisition}{%
+\section{Data Acquisition}\label{data-acquisition}}
+
+The data set used in this project is
+\href{https://www.kaggle.com/kaggle/kaggle-survey-2017/feed}{Kaggle ML
+and Data Science Survey 2017}. I downloaded the multiple choice item
+survey results in csv format and placed it in a GitHub repo
+(\url{https://github.com/keshaws/CUNY_MSDS_2020/tree/master/DATA607})
+
+\hypertarget{importing-multiple-choice-data}{%
+\subsection{Importing Multiple Choice
+data}\label{importing-multiple-choice-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{surverydata_df <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{ (surverydata_link)}
+\NormalTok{survey.data <-}\StringTok{ }\NormalTok{surverydata_df}
+\CommentTok{#lets create a unique ID variable }
+\NormalTok{surverydata_df}\OperatorTok{$}\NormalTok{id <-}\StringTok{ }\KeywordTok{seq.int}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(surverydata_df))}
+\KeywordTok{dim}\NormalTok{(surverydata_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16716   229
+\end{verbatim}
+
+\hypertarget{research-question}{%
+\subsection{Research Question}\label{research-question}}
+
+\textbf{Which are the most values data science skills?}
+
+\hypertarget{understanding-features}{%
+\subsection{Understanding Features}\label{understanding-features}}
+
+Let's start gaining some insignts by exploring demographics features of
+the dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey.demographics <-}\StringTok{ }\NormalTok{survey.data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(GenderSelect,Country,Age,EmploymentStatus) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Country}\OperatorTok{!=}\StringTok{'NA'}\NormalTok{,}\KeywordTok{trimws}\NormalTok{(Country)}\OperatorTok{!=}\StringTok{''}\NormalTok{,Age}\OperatorTok{!=}\StringTok{'NA'}\NormalTok{,}\KeywordTok{trimws}\NormalTok{(GenderSelect) }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'Male'}\NormalTok{,}\StringTok{'Female'}\NormalTok{))}
+\CommentTok{# These workable results were stored to a database, and can be loaded given its restoration as follows:}
+\CommentTok{# survey.demographics <- read_db_tbl(connection, "SELECT * FROM survey_demographics")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey.dem.age.plot <-}\StringTok{ }\NormalTok{survey.demographics }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(Age,GenderSelect) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{count=}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(count))}
+\NormalTok{survey.dem.plot <-}\StringTok{ }\NormalTok{survey.demographics }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Age,Country,GenderSelect,EmploymentStatus) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{count=}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(count))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey.dem.gen.plot <-}\StringTok{ }\NormalTok{survey.demographics }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(GenderSelect) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{count=}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(count))}
+\KeywordTok{head}\NormalTok{(survey.dem.gen.plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   GenderSelect count
+##   <chr>        <int>
+## 1 Male         13416
+## 2 Female        2708
+\end{verbatim}
+
+Tidying the dataset and finding the percentile for each gender group
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey.dem.tidy <-}\StringTok{ }\NormalTok{survey.dem.gen.plot }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{spread}\NormalTok{(GenderSelect,}\StringTok{'count'}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(survey.dem.tidy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   Female  Male
+##    <int> <int>
+## 1   2708 13416
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gender_percentile <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(survey.dem.tidy,}\DataTypeTok{male_percent=}\KeywordTok{round}\NormalTok{((Male}\OperatorTok{/}\NormalTok{(Female}\OperatorTok{+}\NormalTok{Male)}\OperatorTok{*}\DecValTok{100}\NormalTok{),}\DecValTok{2}\NormalTok{),}
+                            \DataTypeTok{female_percent=}\KeywordTok{round}\NormalTok{((Female}\OperatorTok{/}\NormalTok{(Female}\OperatorTok{+}\NormalTok{Male))}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{kable}\NormalTok{(gender_percentile)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{r|r|r|r}
+\hline
+Female & Male & male\_percent & female\_percent\\
+\hline
+2708 & 13416 & 83.21 & 16.79\\
+\hline
+\end{tabular}
+
+\includegraphics{Project3_Group_files/figure-latex/fig01-1.pdf}
+
+There are 16716 survey respondents and we could see that there is a huge
+gender gap in the given dataset with over 83\% are male and female makes
+up only \textasciitilde{}17\% of total. Also, most of respondents are
+full time employed followed by people who are not employed but looking
+for work.
+
+\hypertarget{eda}{%
+\section{EDA}\label{eda}}
+
+Let's take a look at data science activity attributes:
+TimeGatheringData, TimeModelBuilding, TimeProduction, TimeVisualizing,
+TimeFindingInsights.
+
+\hypertarget{data-science-activities}{%
+\subsection{Data Science Activities}\label{data-science-activities}}
+
+The US reponsdents data analysis show that gathering data is the main
+activitiy with higest time consumption 37.75\%. The model building ranks
+2nd, 19.23\%, followed by time spent in finding insights and data
+visualization. Only 10.22\% of total appears to be taken by prodcution
+activities.
+
+\begin{tabular}{l|r}
+\hline
+DSActivity & mean\_precent\\
+\hline
+TimeGatheringData & 37.81491\\
+\hline
+TimeModelBuilding & 19.23414\\
+\hline
+TimeFindingInsights & 14.48332\\
+\hline
+TimeVisualizing & 13.72629\\
+\hline
+TimeProduction & 10.22008\\
+\hline
+\end{tabular}
+
+\begin{center}\includegraphics{Project3_Group_files/figure-latex/fig03-1} \end{center}
+
+\hypertarget{learning-platform}{%
+\subsection{Learning platform}\label{learning-platform}}
+
+\begin{tabular}{r|l|l|l|l|l}
+\hline
+lid & Country & EmploymentStatus & LPlatform & LP\_count & LearningPlatform\\
+\hline
+1 & United States & Not employed, but looking for work & LearningPlatformUsefulnessKaggle & Somewhat useful & Kaggle\\
+\hline
+3 & United States & Independent contractor, freelancer, or self-employed & LearningPlatformUsefulnessBlogs & Very useful & Blogs\\
+\hline
+3 & United States & Independent contractor, freelancer, or self-employed & LearningPlatformUsefulnessCollege & Very useful & College\\
+\hline
+3 & United States & Independent contractor, freelancer, or self-employed & LearningPlatformUsefulnessConferences & Very useful & Conferences\\
+\hline
+3 & United States & Independent contractor, freelancer, or self-employed & LearningPlatformUsefulnessFriends & Very useful & Friends\\
+\hline
+3 & United States & Independent contractor, freelancer, or self-employed & LearningPlatformUsefulnessDocumentation & Very useful & Documentation\\
+\hline
+\end{tabular}
+
+\begin{center}\includegraphics{Project3_Group_files/figure-latex/fig05-1} \end{center}
+
+The survery respondents used different learning platform and it appears
+that learners mostly benefited from personal projects as majority of
+resonse indicate it very useful. Online courses appears to be 2nd very
+useful only to be followed by StackOverflow and Kaggle. Blogs,textbooks
+and college also appear to be very userful whereas newsletters, podcasts
+and tradebook rank low.
+
+\hypertarget{indeed.com}{%
+\section{Indeed.com}\label{indeed.com}}
+
+\hypertarget{web-scrape-indeed.com-for-data-scientist-job-vacancies}{%
+\subsection{Web Scrape Indeed.com for Data Scientist Job
+Vacancies}\label{web-scrape-indeed.com-for-data-scientist-job-vacancies}}
+
+For our fourth approach, we pulled the text from the summary of job
+vacancies for data scientist positions on Indeed.com to get a sense of
+what skills are most in demand for data science.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{indeed <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{summary=}\KeywordTok{character}\NormalTok{(),}\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{) }
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{990}\NormalTok{, }\DecValTok{10}\NormalTok{))\{}
+\NormalTok{  url <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{'https://www.indeed.com/jobs?q=data+scientist&l=all&start='}\NormalTok{,i)}
+\NormalTok{  file <-}\StringTok{ }\KeywordTok{read_html}\NormalTok{(url)}
+  \CommentTok{#summary}
+\NormalTok{  summary <-}\StringTok{ }\NormalTok{file }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{html_nodes}\NormalTok{(}\StringTok{'#resultsCol .summary'}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{html_text}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{str_extract}\NormalTok{(}\StringTok{".+"}\NormalTok{)}
+\NormalTok{indeed <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(indeed, }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(summary)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{transform-data}{%
+\subsection{Transform Data}\label{transform-data}}
+
+Change file format from a data frame into a text file that will work
+with TM.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# data <- write.table(file, file = 'indeed.txt', sep = ",")}
+\NormalTok{file <-}\StringTok{ "https://raw.githubusercontent.com/jambawilliams/DATA607Project3/master/indeed.txt"}
+\NormalTok{text <-}\StringTok{ }\KeywordTok{readLines}\NormalTok{(file)}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{Corpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(text))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{condition-data}{%
+\subsection{Condition Data}\label{condition-data}}
+
+Remove spaces, non-skill words, and punctuation from extracted text.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{toSpace <-}\StringTok{ }\KeywordTok{content_transformer}\NormalTok{(}\ControlFlowTok{function}\NormalTok{ (x , pattern ) }\KeywordTok{gsub}\NormalTok{(pattern, }\StringTok{" "}\NormalTok{, x))}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, toSpace, }\StringTok{"/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, toSpace, "/"): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, toSpace, }\StringTok{"@"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, toSpace, "@"): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, toSpace, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{|"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, toSpace, "\\|"): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, }\KeywordTok{content_transformer}\NormalTok{(tolower))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, content_transformer(tolower)):
+## transformation drops documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removeNumbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, removeNumbers): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removeWords, }\KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, removeWords, stopwords("english")):
+## transformation drops documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removeWords, }\KeywordTok{c}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"experience"}\NormalTok{, }\StringTok{"science"}\NormalTok{, }\StringTok{"predictive"}\NormalTok{, }\StringTok{"will"}\NormalTok{, }\StringTok{"including"}\NormalTok{, }\StringTok{"machine"}\NormalTok{, }\StringTok{"analytics"}\NormalTok{, }\StringTok{"technique"}\NormalTok{, }\StringTok{"advanced"}\NormalTok{, }\StringTok{"team"}\NormalTok{, }\StringTok{"understanding"}\NormalTok{, }\StringTok{"tools"}\NormalTok{, }\StringTok{"deep"}\NormalTok{, }\StringTok{"techniques"}\NormalTok{, }\StringTok{"decision"}\NormalTok{, }\StringTok{"work"}\NormalTok{, }\StringTok{"engineering"}\NormalTok{, }\StringTok{"forests"}\NormalTok{, }\StringTok{"modern"}\NormalTok{, }\StringTok{"trees"}\NormalTok{, }\StringTok{"glms"}\NormalTok{, }\StringTok{"years"}\NormalTok{, }\StringTok{"boosted..."}\NormalTok{, }\StringTok{"variety"}\NormalTok{, }\StringTok{"boosted"}\NormalTok{, }\StringTok{"seen"}\NormalTok{, }\StringTok{"software"}\NormalTok{, }\StringTok{"roles"}\NormalTok{, }\StringTok{"models"}\NormalTok{, }\StringTok{"closely"}\NormalTok{, }\StringTok{"statistical"}\NormalTok{, }\StringTok{"senior"}\NormalTok{, }\StringTok{"experts"}\NormalTok{, }\StringTok{"working"}\NormalTok{, }\StringTok{"engineer"}\NormalTok{, }\StringTok{"leverage"}\NormalTok{, }\StringTok{"learning"}\NormalTok{, }\StringTok{"scientific"}\NormalTok{, }\StringTok{"project"}\NormalTok{, }\StringTok{"domain"}\NormalTok{, }\StringTok{"scientists"}\NormalTok{, }\StringTok{"iquartic"}\NormalTok{, }\StringTok{"ocr"}\NormalTok{, }\StringTok{"use"}\NormalTok{, }\StringTok{"one"}\NormalTok{, }\StringTok{"etc"}\NormalTok{, }\StringTok{"insights"}\NormalTok{, }\StringTok{"scientist"}\NormalTok{, }\StringTok{"trends"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, removeWords, c("data", "experience", :
+## transformation drops documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removePunctuation)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, removePunctuation): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, stripWhitespace)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in tm_map.SimpleCorpus(docs, stripWhitespace): transformation drops
+## documents
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dtm <-}\StringTok{ }\KeywordTok{TermDocumentMatrix}\NormalTok{(docs)}
+\NormalTok{m <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(dtm)}
+\NormalTok{v <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{rowSums}\NormalTok{(m), }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{word =} \KeywordTok{names}\NormalTok{(v), }\DataTypeTok{freq=}\NormalTok{v)}
+\NormalTok{d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                  word freq
+## …                                   …  581
+## python                         python  246
+## statistics                 statistics  240
+## modeling                     modeling  157
+## analysis                     analysis  137
+## sql                               sql  114
+## mining                         mining  106
+## analytical                 analytical   90
+## design                         design   83
+## algorithms                 algorithms   82
+## business                     business   78
+## can                               can   77
+## various                       various   76
+## product                       product   75
+## provide                       provide   74
+## relevant                     relevant   73
+## leading                       leading   73
+## required                     required   73
+## application               application   70
+## develop                       develop   70
+## using                           using   69
+## companies                   companies   68
+## thousands                   thousands   68
+## service                       service   67
+## databases                   databases   66
+## spark                           spark   66
+## matlab                         matlab   66
+## connects                     connects   66
+## considered                 considered   66
+## free                             free   66
+## indeed                         indeed   66
+## tech                             tech   66
+## industry                     industry   66
+## teams                           teams   65
+## degree                         degree   64
+## computing                   computing   63
+## solid                           solid   62
+## linux                           linux   61
+## scripting                   scripting   61
+## research                     research   61
+## ensure                         ensure   60
+## environments             environments   59
+## experimental             experimental   59
+## testing                       testing   59
+## servers…                     servers…   57
+## shell                           shell   57
+## innovative                 innovative   55
+## strongly…                   strongly…   54
+## company                       company   53
+## computer                     computer   52
+## applied                       applied   51
+## delivering                 delivering   50
+## primary                       primary   50
+## supporting                 supporting   50
+## visualization           visualization   49
+## health                         health   48
+## knowledge                   knowledge   48
+## competitive               competitive   48
+## monitor                       monitor   48
+## mathematics               mathematics   47
+## clinical                     clinical   47
+## expertise                   expertise   47
+## endend                         endend   47
+## applying                     applying   45
+## development               development   45
+## acting                         acting   45
+## coordinate                 coordinate   45
+## point                           point   45
+## asset…                         asset…   45
+## competitor                 competitor   45
+## direction                   direction   45
+## remains                       remains   45
+## build                           build   44
+## contact                       contact   44
+## highquality               highquality   44
+## must                             must   42
+## programming               programming   42
+## field                           field   40
+## related                       related   39
+## support                       support   39
+## problems                     problems   37
+## quantitative             quantitative   36
+## complex                       complex   35
+## building                     building   35
+## processing                 processing   35
+## subject                       subject   35
+## sets                             sets   35
+## solutions                   solutions   35
+## engineers                   engineers   33
+## apply                           apply   32
+## large                           large   32
+## skills                         skills   31
+## nlp                               nlp   29
+## least                           least   29
+## role                             role   28
+## matter                         matter   28
+## identify                     identify   28
+## language                     language   27
+## methods                       methods   26
+## intelligence             intelligence   26
+## implementing             implementing   26
+## phd                               phd   26
+## new                               new   26
+## regression                 regression   26
+## management                 management   25
+## manage                         manage   25
+## languages                   languages   24
+## help                             help   24
+## developing                 developing   24
+## plus                             plus   24
+## systems                       systems   24
+## solution                     solution   23
+## sas                               sas   23
+## create                         create   23
+## strong                         strong   23
+## technical                   technical   23
+## needs                           needs   23
+## natural                       natural   23
+## responsible               responsible   22
+## analyze                       analyze   22
+## equivalent                 equivalent   21
+## artificial                 artificial   21
+## designing                   designing   21
+## candidate                   candidate   20
+## following                   following   20
+## requirements             requirements   20
+## bachelor’s                 bachelor’s   19
+## projects                     projects   19
+## implement                   implement   19
+## stakeholders             stakeholders   19
+## solve                           solve   19
+## time                             time   19
+## physics                       physics   18
+## products                     products   18
+## optimization             optimization   18
+## big                               big   18
+## group                           group   17
+## master’s                     master’s   17
+## position                     position   17
+## operations                 operations   17
+## text                             text   17
+## proficiency               proficiency   17
+## looking                       looking   17
+## minimum                       minimum   17
+## marketing                   marketing   16
+## multiple                     multiple   16
+## ability                       ability   16
+## available                   available   16
+## extract                       extract   16
+## analytic                     analytic   16
+## neural                         neural   16
+## approaches                 approaches   16
+## actuarial                   actuarial   15
+## two                               two   15
+## information               information   15
+## clustering                 clustering   15
+## datasets                     datasets   15
+## networks                     networks   15
+## within                         within   15
+## expert                         expert   15
+## linear                         linear   15
+## analyst                       analyst   15
+## well                             well   15
+## demonstrated             demonstrated   15
+## analyzing                   analyzing   14
+## enterprise                 enterprise   14
+## platform                     platform   14
+## methodologies           methodologies   14
+## areas                           areas   14
+## actionable                 actionable   14
+## care                             care   13
+## tensorflow                 tensorflow   13
+## patterns                     patterns   13
+## serve                           serve   13
+## preferred                   preferred   13
+## include                       include   13
+## ’ll                               ’ll   13
+## customer                     customer   13
+## based                           based   13
+## background                 background   13
+## appropriate               appropriate   13
+## model                           model   13
+## creating                     creating   13
+## technologies             technologies   13
+## members                       members   13
+## analytical…               analytical…   12
+## provides                     provides   12
+## level                           level   12
+## strategy                     strategy   12
+## familiarity               familiarity   12
+## area                             area   12
+## bachelors                   bachelors   12
+## consulting                 consulting   12
+## able                             able   12
+## applications             applications   12
+## technology                 technology   12
+## improve                       improve   12
+## masters                       masters   12
+## services                     services   12
+## process                       process   12
+## focus                           focus   12
+## zero                             zero   11
+## –                                   –   11
+## vision                         vision   11
+## plans                           plans   11
+## tableau                       tableau   11
+## meaningful                 meaningful   11
+## lead                             lead   11
+## providing                   providing   11
+## customers                   customers   11
+## benefits                     benefits   10
+## professional             professional   10
+## user                             user   10
+## quality                       quality   10
+## also                             also   10
+## economics                   economics   10
+## outcomes                     outcomes   10
+## frameworks                 frameworks   10
+## write                           write   10
+## insurance                   insurance   10
+## mathematical             mathematical   10
+## supervised                 supervised   10
+## medical                       medical   10
+## maintain                     maintain   10
+## seeking                       seeking   10
+## performing                 performing    9
+## dental                         dental    9
+## year                             year    9
+## sources                       sources    9
+## opportunity               opportunity    9
+## hands                           hands    9
+## successful                 successful    9
+## java                             java    9
+## learn                           learn    9
+## reporting                   reporting    9
+## combination               combination    9
+## forecasting               forecasting    9
+## part                             part    9
+## public                         public    9
+## key                               key    9
+## classification         classification    9
+## reports                       reports    9
+## scale                           scale    9
+## computational           computational    9
+## analysts                     analysts    9
+## sales                           sales    9
+## specific                     specific    9
+## consumer                     consumer    9
+## drive                           drive    9
+## deliver                       deliver    9
+## access                         access    8
+## define                         define    8
+## understand                 understand    8
+## salary                         salary    8
+## pandas                         pandas    8
+## resource                     resource    8
+## scripts                       scripts    8
+## decisions                   decisions    8
+## perform                       perform    8
+## series                         series    8
+## tasks                           tasks    8
+## efforts                       efforts    8
+## join                             join    8
+## database                     database    8
+## questions                   questions    8
+## program                       program    8
+## governance                 governance    8
+## real                             real    8
+## unsupervised             unsupervised    8
+## seven                           seven    8
+## production                 production    8
+## random                         random    8
+## discipline                 discipline    8
+## experienced               experienced    8
+## leveraging                 leveraging    8
+## opportunities           opportunities    8
+## individual                 individual    8
+## business…                   business…    8
+## qualitative               qualitative    8
+## collect                       collect    8
+## recommendations       recommendations    7
+## focused                       focused    7
+## improving                   improving    7
+## capabilities             capabilities    7
+## enable                         enable    7
+## similar                       similar    7
+## activities                 activities    7
+## programs                     programs    7
+## leadership                 leadership    7
+## inform                         inform    7
+## employees                   employees    7
+## excellent                   excellent    7
+## plan                             plan    7
+## digital                       digital    7
+## performance               performance    7
+## microsoft                   microsoft    7
+## office                         office    7
+## extensive                   extensive    7
+## hadoop                         hadoop    7
+## automation                 automation    7
+## execute                       execute    7
+## simulation                 simulation    7
+## five                             five    7
+## distributed               distributed    7
+## generalized               generalized    7
+## internal                     internal    7
+## staff                           staff    7
+## dashboards                 dashboards    7
+## different                   different    7
+## outside                       outside    7
+## range                           range    7
+## like                             like    7
+## processes                   processes    7
+## modelling                   modelling    7
+## partner                       partner    7
+## training                     training    7
+## methods…                     methods…    7
+## train                           train    7
+## deploy                         deploy    7
+## informatics               informatics    7
+## findings                     findings    7
+## make                             make    7
+## realworld                   realworld    7
+## electrical                 electrical    7
+## results                       results    7
+## impact                         impact    6
+## code                             code    6
+## scala                           scala    6
+## right                           right    6
+## framework                   framework    6
+## clients                       clients    6
+## find                             find    6
+## sciences                     sciences    6
+## writing                       writing    6
+## better                         better    6
+## contribute                 contribute    6
+## model…                         model…    6
+## gis                               gis    6
+## translate                   translate    6
+## client                         client    6
+## small                           small    6
+## effectively               effectively    6
+## someone                       someone    6
+## conduct                       conduct    6
+## especially                 especially    6
+## job                               job    6
+## guide                           guide    6
+## practical                   practical    6
+## innovation                 innovation    6
+## concepts                     concepts    6
+## warehouse                   warehouse    6
+## hiring                         hiring    6
+## signal                         signal    6
+## environment               environment    6
+## responsibilities     responsibilities    6
+## guidance                     guidance    6
+## collaborate               collaborate    6
+## spss                             spss    6
+## ideal                           ideal    6
+## creation                     creation    6
+## person                         person    6
+## communication           communication    6
+## analyses                     analyses    6
+## highly                         highly    6
+## meet                             meet    6
+## collaboratively       collaboratively    6
+## visualizations         visualizations    6
+## dynamic                       dynamic    6
+## interest                     interest    6
+## network                       network    6
+## insight                       insight    6
+## driven                         driven    6
+## manipulate                 manipulate    6
+## practice                     practice    6
+## utilize                       utilize    6
+## requires                     requires    6
+## end                               end    6
+## deploying                   deploying    6
+## accurate                     accurate    6
+## facets                         facets    5
+## excel                           excel    5
+## diverse                       diverse    5
+## education                   education    5
+## top                               top    5
+## growth                         growth    5
+## life                             life    5
+## graduate                     graduate    5
+## image                           image    5
+## clear                           clear    5
+## descriptive               descriptive    5
+## others                         others    5
+## architecture             architecture    5
+## entry                           entry    5
+## keep                             keep    5
+## junior                         junior    5
+## assist                         assist    5
+## collection                 collection    5
+## metrics                       metrics    5
+## assistant                   assistant    5
+## director                     director    5
+## generate                     generate    5
+## largescale                 largescale    5
+## nonlinear                   nonlinear    5
+## exploratory               exploratory    5
+## implementation         implementation    5
+## feature                       feature    5
+## used                             used    5
+## high                             high    5
+## risks                           risks    5
+## maintenance               maintenance    5
+## works                           works    5
+## logistic                     logistic    5
+## standard                     standard    5
+## programmatic             programmatic    5
+## advertising               advertising    5
+## packages                     packages    5
+## electronic                 electronic    5
+## tableau…                     tableau…    5
+## proven                         proven    5
+## includes                     includes    5
+## collaboration           collaboration    5
+## sense                           sense    5
+## graphbased                 graphbased    5
+## segmentation             segmentation    5
+## prototype                   prototype    5
+## across                         across    5
+## platforms                   platforms    5
+## etl                               etl    5
+## wide                             wide    5
+## scalable                     scalable    5
+## clean                           clean    5
+## possess                       possess    5
+## involved                     involved    5
+## novel                           novel    5
+## broad                           broad    5
+## bayesian                     bayesian    5
+## delivery                     delivery    5
+## healthcare                 healthcare    5
+## draw                             draw    5
+## tree                             tree    5
+## deliverables             deliverables    5
+## optimizing                 optimizing    5
+## resources                   resources    5
+## courses                       courses    5
+## exciting                     exciting    5
+## iot                               iot    5
+## interdisciplinary   interdisciplinary    5
+## motivated                   motivated    5
+## efficient                   efficient    5
+## desired                       desired    5
+## features                     features    5
+## days                             days    5
+## effective                   effective    5
+## package                       package    5
+## hershey’s                   hershey’s    4
+## course                         course    4
+## evaluating                 evaluating    4
+## related…                     related…    4
+## communicate               communicate    4
+## get                               get    4
+## pytorch                       pytorch    4
+## goals                           goals    4
+## managing                     managing    4
+## scikit                         scikit    4
+## foundation                 foundation    4
+## passionate                 passionate    4
+## additional                 additional    4
+## bioinformatics         bioinformatics    4
+## interpret                   interpret    4
+## organize                     organize    4
+## academic                     academic    4
+## synthesize                 synthesize    4
+## current                       current    4
+## best                             best    4
+## stateart                     stateart    4
+## together                     together    4
+## develops                     develops    4
+## ’                                   ’    4
+## candidates                 candidates    4
+## relational                 relational    4
+## architects                 architects    4
+## consistent                 consistent    4
+## hour                             hour    4
+## rich                             rich    4
+## answer                         answer    4
+## defined                       defined    4
+## populations               populations    4
+## select                         select    4
+## along                           along    4
+## establish                   establish    4
+## massive                       massive    4
+## social                         social    4
+## house                           house    4
+## allows                         allows    4
+## offers                         offers    4
+## policy                         policy    4
+## population                 population    4
+## enhance                       enhance    4
+## statistician             statistician    4
+## developers                 developers    4
+## custom                         custom    4
+## making                         making    4
+## organization             organization    4
+## manipulation             manipulation    4
+## either                         either    4
+## need                             need    4
+## specialist                 specialist    4
+## may                               may    4
+## present                       present    4
+## detect                         detect    4
+## volumes                       volumes    4
+## directly                     directly    4
+## skill                           skill    4
+## core                             core    4
+## collaborative           collaborative    4
+## currently                   currently    4
+## robust                         robust    4
+## smart                           smart    4
+## relationships           relationships    4
+## solving                       solving    4
+## identified                 identified    4
+## input                           input    4
+## known                           known    4
+## nhcs                             nhcs    4
+## opioid                         opioid    4
+## s’                                 s’    4
+## ‘research                   ‘research    4
+## ’s                                 ’s    4
+## supports                     supports    4
+## transform                   transform    4
+## strategic                   strategic    4
+## forest                         forest    4
+## gradient                     gradient    4
+## proposed                     proposed    4
+## identifying               identifying    4
+## optimize                     optimize    4
+## oriented                     oriented    4
+## unstructured             unstructured    4
+## setting                       setting    4
+## disciplines               disciplines    4
+## deployment                 deployment    4
+## significant               significant    4
+## libraries                   libraries    4
+## execution                   execution    4
+## amounts                       amounts    4
+## box                               box    4
+## web                               web    4
+## math                             math    4
+## order                           order    4
+## value                           value    4
+## interested                 interested    4
+## near                             near    4
+## phase                           phase    4
+## study                           study    4
+## want                             want    4
+## people                         people    4
+## rel                               rel    4
+## coverage                     coverage    4
+## encompasses               encompasses    4
+## fluency                       fluency    4
+## details                       details    4
+## combine                       combine    4
+## specialists               specialists    4
+## reasoning                   reasoning    4
+## important                   important    4
+## additionally             additionally    4
+## proficient                 proficient    4
+## oversee                       oversee    4
+## specialization         specialization    4
+## datalake                     datalake    4
+## summary                       summary    3
+## analysis…                   analysis…    3
+## full                             full    3
+## stack                           stack    3
+## javascript                 javascript    3
+## geospatial                 geospatial    3
+## interact                     interact    3
+## applicable                 applicable    3
+## terms                           terms    3
+## scikitlearn               scikitlearn    3
+## employment                 employment    3
+## objective                   objective    3
+## applicant                   applicant    3
+## architectures           architectures    3
+## positions                   positions    3
+## provider                     provider    3
+## turn                             turn    3
+## solutions…                 solutions…    3
+## intern                         intern    3
+## paid                             paid    3
+## demonstrates             demonstrates    3
+## several                       several    3
+## behavioral                 behavioral    3
+## efficiency                 efficiency    3
+## assisting                   assisting    3
+## clearance                   clearance    3
+## security                     security    3
+## government                 government    3
+## dive                             dive    3
+## structured                 structured    3
+## date                             date    3
+## developments             developments    3
+## gaps                             gaps    3
+## functions                   functions    3
+## system                         system    3
+## highdimensional       highdimensional    3
+## emphasis                     emphasis    3
+## fundamentals             fundamentals    3
+## nonparametric           nonparametric    3
+## random…                       random…    3
+## participate               participate    3
+## conducts                     conducts    3
+## inferential               inferential    3
+## specialized               specialized    3
+## cots                             cots    3
+## saas                             saas    3
+## digital…                     digital…    3
+## general                       general    3
+## center                         center    3
+## environmental           environmental    3
+## limited                       limited    3
+## applications…           applications…    3
+## experiments               experiments    3
+## global                         global    3
+## store                           store    3
+## stats                           stats    3
+## uncover                       uncover    3
+## bayes                           bayes    3
+## naive                           naive    3
+## administrative         administrative    3
+## accuracy                     accuracy    3
+## evolve                         evolve    3
+## administration         administration    3
+## achieve                       achieve    3
+## influencing               influencing    3
+## detection                   detection    3
+## discover                     discover    3
+## acp                               acp    3
+## competency                 competency    3
+## idea                             idea    3
+## transactional           transactional    3
+## validating                 validating    3
+## basic                           basic    3
+## pattern                       pattern    3
+## discovering               discovering    3
+## longterm                     longterm    3
+## champion                     champion    3
+## companys                     companys    3
+## inside                         inside    3
+## promoting                   promoting    3
+## unit…                           unit…    3
+## cloud                           cloud    3
+## track                           track    3
+## prepare                       prepare    3
+## integrating               integrating    3
+## levels                         levels    3
+## integrate                   integrate    3
+## intervention             intervention    3
+## challenges                 challenges    3
+## procedures                 procedures    3
+## report                         report    3
+## producing                   producing    3
+## intelligence…           intelligence…    3
+## jupyter                       jupyter    3
+## run                               run    3
+## accredited                 accredited    3
+## college                       college    3
+## educational               educational    3
+## machines                     machines    3
+## derive                         derive    3
+## demand                         demand    3
+## critical                     critical    3
+## strongly                     strongly    3
+## gain                             gain    3
+## fields                         fields    3
+## social…                       social…    3
+## explore                       explore    3
+## set                               set    3
+## community                   community    3
+## sharing                       sharing    3
+## international           international    3
+## automate                     automate    3
+## record                         record    3
+## finance…                     finance…    3
+## addition                     addition    3
+## transforming             transforming    3
+## success                       success    3
+## keras                           keras    3
+## final                           final    3
+## around                         around    3
+## think                           think    3
+## comfortable               comfortable    3
+## classifiers               classifiers    3
+## shiny                           shiny    3
+## cuttingedge               cuttingedge    3
+## vast                             vast    3
+## common                         common    3
+## algorithmic               algorithmic    3
+## infrastructure         infrastructure    3
+## medicine                     medicine    3
+## address                       address    3
+## tracking                     tracking    3
+## bash                             bash    3
+## git                               git    3
+## structures                 structures    3
+## term                             term    3
+## architect                   architect    3
+## quantify                     quantify    3
+## pipelines                   pipelines    3
+## financial                   financial    3
+## employee                     employee    3
+## first                           first    3
+## partnerships             partnerships    3
+## records                       records    3
+## boosting                     boosting    3
+## functional                 functional    3
+## capital                       capital    3
+## direct                         direct    3
+## oracle                         oracle    3
+## algebra                       algebra    3
+## geometry                     geometry    3
+## vector                         vector    3
+## graph                           graph    3
+## aws                               aws    3
+## familiar                     familiar    3
+## ingestion                   ingestion    3
+## answers                       answers    3
+## pursue                         pursue    3
+## fullstack                   fullstack    3
+## previous                     previous    3
+## recommendation         recommendation    3
+## necessary                   necessary    3
+## open                             open    3
+## pipeline                     pipeline    3
+## hidden                         hidden    3
+## algorithm                   algorithm    3
+## cognitive                   cognitive    3
+## expand                         expand    3
+## time…                           time…    3
+## systems…                     systems…    3
+## understood                 understood    3
+## investigation           investigation    3
+## human                           human    3
+## reduction                   reduction    3
+## functionality           functionality    3
+## designs                       designs    3
+## mentorship                 mentorship    3
+## crossfunctional       crossfunctional    3
+## cancer                         cancer    2
+## increase                     increase    2
+## ampl                             ampl    2
+## journey                       journey    2
+## view                             view    2
+## cvi’s                           cvi’s    2
+## take                             take    2
+## vpc                               vpc    2
+## utilizing                   utilizing    2
+## clearly                       clearly    2
+## duties                         duties    2
+## prevent                       prevent    2
+## builder                       builder    2
+## mission                       mission    2
+## refine                         refine    2
+## review                         review    2
+## toolkits                     toolkits    2
+## certification           certification    2
+## please                         please    2
+## stages                         stages    2
+## claims                         claims    2
+## cia                               cia    2
+## sideside                     sideside    2
+## poster                         poster    2
+## flexible                     flexible    2
+## retirement                 retirement    2
+## mentor                         mentor    2
+## aspects                       aspects    2
+## dives                           dives    2
+## kpi                               kpi    2
+## practices                   practices    2
+## ingest                         ingest    2
+## structure…                 structure…    2
+## editing                       editing    2
+## established               established    2
+## interns                       interns    2
+## research…                   research…    2
+## test                             test    2
+## inference                   inference    2
+## algorithms…               algorithms…    2
+## counternarcotics     counternarcotics    2
+## helping                       helping    2
+## reviews                       reviews    2
+## advances                     advances    2
+## stay                             stay    2
+## healthrelated           healthrelated    2
+## feedback                     feedback    2
+## secret                         secret    2
+## throughout                 throughout    2
+## english                       english    2
+## interesting               interesting    2
+## attribution               attribution    2
+## major                           major    2
+## skilled                       skilled    2
+## assists                       assists    2
+## cise                             cise    2
+## deputy                         deputy    2
+## directorate               directorate    2
+## directorates             directorates    2
+## formulation               formulation    2
+## officer                       officer    2
+## learners                     learners    2
+## million                       million    2
+## worldwide                   worldwide    2
+## translating               translating    2
+## datascience               datascience    2
+## organizational         organizational    2
+## planning                     planning    2
+## chemistry                   chemistry    2
+## becoming                     becoming    2
+## ongoing                       ongoing    2
+## path                             path    2
+## employs                       employs    2
+## lake                             lake    2
+## ontology                     ontology    2
+## located                       located    2
+## formally                     formally    2
+## trained                       trained    2
+## exploit                       exploit    2
+## hdfs                             hdfs    2
+## transvoyant               transvoyant    2
+## esg                               esg    2
+## function                     function    2
+## dealing                       dealing    2
+## reference                   reference    2
+## follow                         follow    2
+## nature                         nature    2
+## overall                       overall    2
+## programme                   programme    2
+## simulations               simulations    2
+## asset                           asset    2
+## bachelor                     bachelor    2
+## mail                             mail    2
+## base                             base    2
+## preparation               preparation    2
+## exposure                     exposure    2
+## evaluate                     evaluate    2
+## interpretation         interpretation    2
+## users                           users    2
+## promotion                   promotion    2
+## drug                             drug    2
+## finetune                     finetune    2
+## higherlevels             higherlevels    2
+## protocolsand             protocolsand    2
+## regularization         regularization    2
+## conceptual                 conceptual    2
+## brightest                   brightest    2
+## futuristic                 futuristic    2
+## groundbreaking         groundbreaking    2
+## ideas                           ideas    2
+## minds                           minds    2
+## researching               researching    2
+## backgrounds               backgrounds    2
+## equipped                     equipped    2
+## demographic               demographic    2
+## viewing                       viewing    2
+## vital                           vital    2
+## aiding                         aiding    2
+## facilitating             facilitating    2
+## incoming                     incoming    2
+## sure…                           sure…    2
+## wellness                     wellness    2
+## ill                               ill    2
+## studies                       studies    2
+## timelines                   timelines    2
+## validation                 validation    2
+## commercialization   commercialization    2
+## reformulated             reformulated    2
+## industryleading       industryleading    2
+## behavior                     behavior    2
+## grow                             grow    2
+## predict                       predict    2
+## realtime                     realtime    2
+## server                         server    2
+## anomalies                   anomalies    2
+## prior                           prior    2
+## advance                       advance    2
+## crm                               crm    2
+## risk                             risk    2
+## •                                   •    2
+## competencies             competencies    2
+## using…                         using…    2
+## agents                         agents    2
+## brings                         brings    2
+## makers                         makers    2
+## exploiting                 exploiting    2
+## storytelling             storytelling    2
+## journal                       journal    2
+## manager                       manager    2
+## regulatory                 regulatory    2
+## safety                         safety    2
+## steps                           steps    2
+## guidelines                 guidelines    2
+## policies                     policies    2
+## enthusiastic             enthusiastic    2
+## running                       running    2
+## actuaries                   actuaries    2
+## department                 department    2
+## competence                 competence    2
+## informed                     informed    2
+## participating           participating    2
+## responsibility         responsibility    2
+## autonomous                 autonomous    2
+## communications         communications    2
+## cooperative               cooperative    2
+## driving                       driving    2
+## network…                     network…    2
+## problem                       problem    2
+## biomedical                 biomedical    2
+## medal                           medal    2
+## patient                       patient    2
+## non                               non    2
+## applicants                 applicants    2
+## cloud…                         cloud…    2
+## knn                               knn    2
+## svm                               svm    2
+## forecast                     forecast    2
+## potential                   potential    2
+## bomoda                         bomoda    2
+## eliciting                   eliciting    2
+## cell                             cell    2
+## dissection                 dissection    2
+## phenotypically         phenotypically    2
+## expected                     expected    2
+## pharmd                         pharmd    2
+## needed                         needed    2
+## hive                             hive    2
+## pig                               pig    2
+## query                           query    2
+## seeks                           seeks    2
+## shall                           shall    2
+## sponsors                     sponsors    2
+## without                       without    2
+## member                         member    2
+## can…                             can…    2
+## future                         future    2
+## readily                       readily    2
+## university                 university    2
+## climate                       climate    2
+## hydrology                   hydrology    2
+## microwave                   microwave    2
+## optical                       optical    2
+## passive                       passive    2
+## radar                           radar    2
+## remote                         remote    2
+## sensing                       sensing    2
+## external                     external    2
+## acumen                         acumen    2
+## company’s                   company’s    2
+## credit                         credit    2
+## operating                   operating    2
+## verbal                         verbal    2
+## written                       written    2
+## require                       require    2
+## strategists               strategists    2
+## retrieval                   retrieval    2
+## beneficial                 beneficial    2
+## professionals           professionals    2
+## payer                           payer    2
+## bring                           bring    2
+## businessbusiness     businessbusiness    2
+## channels                     channels    2
+## customerlevel           customerlevel    2
+## directconsumer         directconsumer    2
+## proactively               proactively    2
+## purpose                       purpose    2
+## nextgeneration         nextgeneration    2
+## assignments               assignments    2
+## builds                         builds    2
+## market                         market    2
+## biological                 biological    2
+## art                               art    2
+## state                           state    2
+## mllib                           mllib    2
+## day                               day    2
+## status                         status    2
+## raw                               raw    2
+## scenario                     scenario    2
+## survey                         survey    2
+## completion                 completion    2
+## executing                   executing    2
+## programing                 programing    2
+## large…                         large…    2
+## bespoke                       bespoke    2
+## black                           black    2
+## strategies                 strategies    2
+## consider…                   consider…    2
+## library                       library    2
+## rectangular               rectangular    2
+## probabilistic…         probabilistic…    2
+## exploring                   exploring    2
+## growers                       growers    2
+## sit                               sit    2
+## gpuaccelerated         gpuaccelerated    2
+## ’re                               ’re    2
+## comprehensive…         comprehensive…    2
+## domains                       domains    2
+## precision                   precision    2
+## classical                   classical    2
+## visualize                   visualize    2
+## applies                       applies    2
+## formulate                   formulate    2
+## discovery                   discovery    2
+## existing                     existing    2
+## specifically             specifically    2
+## workflows                   workflows    2
+## protocols                   protocols    2
+## affairs                       affairs    2
+## css                               css    2
+## elm                               elm    2
+## html                             html    2
+## julia                           julia    2
+## extraction                 extraction    2
+## wellestablished       wellestablished    2
+## cleanse                       cleanse    2
+## transformation         transformation    2
+## intuit                         intuit    2
+## analytic…                   analytic…    2
+## cloudbased                 cloudbased    2
+## media                           media    2
+## valence                       valence    2
+## exists                         exists    2
+## mining…                       mining…    2
+## ddc                               ddc    2
+## funded                         funded    2
+## sources…                     sources…    2
+## “pending                     “pending    2
+## ”                                   ”    2
+## thresholds                 thresholds    2
+## fill                             fill    2
+## outstanding               outstanding    2
+## interpretable           interpretable    2
+## exploration               exploration    2
+## entities                     entities    2
+## events                         events    2
+## forensic                     forensic    2
+## investigations         investigations    2
+## investigative           investigative    2
+## relevant…                   relevant…    2
+## bach                             bach    2
+## comp                             comp    2
+## econometrics             econometrics    2
+## sci                               sci    2
+## qualifications         qualifications    2
+## collaborating           collaborating    2
+## opencv                         opencv    2
+## assessment                 assessment    2
+## becomes                       becomes    2
+## completes                   completes    2
+## cover                           cover    2
+## initial                       initial    2
+## month                           month    2
+## spanning                     spanning    2
+## name                             name    2
+## every                           every    2
+## associate                   associate    2
+## provide…                     provide…    2
+## gathering                   gathering    2
+## jobs                             jobs    2
+## scale…                         scale…    2
+## special                       special    2
+## offer                           offer    2
+## distractors               distractors    2
+## cost                             cost    2
+## payments                     payments    2
+## corporate                   corporate    2
+## three                           three    2
+## creative                     creative    2
+## employers                   employers    2
+## appropriately           appropriately    2
+## approach                     approach    2
+## entity                         entity    2
+## interface                   interface    2
+## timely                         timely    2
+## doctors                       doctors    2
+## come                             come    2
+## integration               integration    2
+## standardization       standardization    2
+## satellite                   satellite    2
+## thoughtful                 thoughtful    2
+## consultative             consultative    2
+## emphasis…                   emphasis…    2
+## fast                             fast    2
+## paced                           paced    2
+## rigor                           rigor    2
+## scope                           scope    2
+## thor                             thor    2
+## worked                         worked    2
+## caffe                           caffe    2
+## ideally                       ideally    2
+## favorite                     favorite    2
+## know                             know    2
+## nittygritty               nittygritty    2
+## connected                   connected    2
+## self…                           self…    2
+## maintaining               maintaining    2
+## prototyping               prototyping    2
+## privacy                       privacy    2
+## semistructured         semistructured    2
+## involving                   involving    2
+## craft                           craft    2
+## entrenched                 entrenched    2
+## industries                 industries    2
+## achievements             achievements    2
+## activity                     activity    2
+## consists                     consists    2
+## generalists               generalists    2
+## built                           built    2
+## productionready       productionready    2
+## source                         source    2
+## multitasking             multitasking    2
+## terminology               terminology    2
+## compensation             compensation    2
+## going                           going    2
+## inputs                         inputs    2
+## pollution                   pollution    2
+## single…                       single…    2
+## unreported                 unreported    2
+## newsroom                     newsroom    2
+## predictions               predictions    2
+## reframe                       reframe    2
+## bhsai                           bhsai    2
+## hjf                               hjf    2
+## operational               operational    2
+## chemical                     chemical    2
+## materials…                 materials…    2
+## mechanical                 mechanical    2
+## nano                             nano    2
+## optics                         optics    2
+## determine                   determine    2
+## fellow                         fellow    2
+## postdoctoral             postdoctoral    2
+## transinstitutional transinstitutional    2
+## programmer                 programmer    2
+## higher                         higher    2
+## buyers                         buyers    2
+## dsml                             dsml    2
+## entrepreneurs           entrepreneurs    2
+## goods                           goods    2
+## organization’s         organization’s    2
+## remarkable                 remarkable    2
+## patients                     patients    2
+## ways                             ways    2
+## world                           world    2
+## leaning                       leaning    2
+## title                           title    2
+## belief                         belief    2
+## markov…                       markov…    2
+## spatial                       spatial    2
+## symbolic                     symbolic    2
+## alignment                   alignment    2
+## independent               independent    2
+## makes                           makes    2
+## principles                 principles    2
+## relates                       relates    2
+## solves                         solves    2
+## delegating                 delegating    2
+## inclusive                   inclusive    2
+## setting…                     setting…    2
+## operation                   operation    2
+## physics…                     physics…    2
+## inc                               inc    2
+## hypotheses…               hypotheses…    2
+## noblis                         noblis    2
+## offline                       offline    2
+## recruit                       recruit    2
+## worldclass                 worldclass    2
+## dst                               dst    2
+## military                     military    2
+## researchers               researchers    2
+## directors                   directors    2
+## investigators           investigators    2
+## pis                               pis    2
+## principal                   principal    2
+## queries                       queries    2
+## biostatistics…         biostatistics…    2
+## collegelevel             collegelevel    2
+## coursework                 coursework    2
+## facts                           facts    2
+## collaborators           collaborators    2
+## downstream                 downstream    2
+## providers                   providers    2
+## upstream                     upstream    2
+## beginning                   beginning    2
+## laid                             laid    2
+## presentation             presentation    2
+## supervisors               supervisors    2
+## outputs                       outputs    2
+## recommended               recommended    2
+## stata                           stata    2
+## selected                     selected    2
+## cnn                               cnn    2
+## lstm                             lstm    2
+## rnn                               rnn    2
+## cases                           cases    2
+## brands…                       brands…    2
+## focusing                     focusing    2
+## fuel                             fuel    2
+## tapestry                     tapestry    2
+## thinking                     thinking    2
+## chatbots…                   chatbots…    2
+## trend                           trend    2
+## genworth                     genworth    2
+## individuals               individuals    2
+## mortgage                     mortgage    2
+## talented                     talented    2
+## statisticians           statisticians    2
+## nonproliferation     nonproliferation    2
+## nuclear                       nuclear    2
+## unit                             unit    2
+## chain                           chain    2
+## supply                         supply    2
+## degrees                       degrees    2
+## indians                       indians    2
+## proprietary               proprietary    2
+## support…                     support…    2
+## opening                       opening    2
+## markets                       markets    2
+## develop…                     develop…    2
+## collected                   collected    2
+## prediction                 prediction    2
+## azure                           azure    2
+## cosmosdb                     cosmosdb    2
+## hub                               hub    2
+## stream                         stream    2
+## toolkit                       toolkit    2
+## workbench                   workbench    2
+## naval                           naval    2
+## scipy                           scipy    2
+## conversation             conversation    2
+## channels…                   channels…    2
+## criteo                         criteo    2
+## globe                           globe    2
+## publishers                 publishers    2
+## hire                             hire    2
+## mcdonald’s                 mcdonald’s    2
+## awareness                   awareness    1
+## fellows’                     fellows’    1
+## past                             past    1
+## reimagining               reimagining    1
+## trials                         trials    1
+## veterans                     veterans    1
+## break                           break    1
+## great                           great    1
+## funnel                         funnel    1
+## agencysponsored       agencysponsored    1
+## attendance                 attendance    1
+## audience                     audience    1
+## become                         become    1
+## conclusions               conclusions    1
+## continuing                 continuing    1
+## enrichment                 enrichment    1
+## innovate                     innovate    1
+## rich…                           rich…    1
+## executives                 executives    1
+## sponsorship               sponsorship    1
+## visa                             visa    1
+## add                               add    1
+## agreement                   agreement    1
+## assign…                       assign…    1
+## bargaining                 bargaining    1
+## collective                 collective    1
+## modify                         modify    1
+## remove                         remove    1
+## reserves                     reserves    1
+## caret                           caret    1
+## employer                     employer    1
+## former                         former    1
+## noncompete                 noncompete    1
+## restrictions             restrictions    1
+## sifting                       sifting    1
+## discussion                 discussion    1
+## reusable                     reusable    1
+## dyplr                           dyplr    1
+## tidyverse                   tidyverse    1
+## computerized             computerized    1
+## exam                             exam    1
+## item                             item    1
+## basketball                 basketball    1
+## game                             game    1
+## coding                         coding    1
+## standards                   standards    1
+## classification…       classification…    1
+## click                           click    1
+## federal                       federal    1
+## https                           https    1
+## link                             link    1
+## policyoversight       policyoversight    1
+## wwwopmgov                   wwwopmgov    1
+## timeseries                 timeseries    1
+## measure                       measure    1
+## membership                 membership    1
+## validate                     validate    1
+## just                             just    1
+## eeo                               eeo    1
+## law                               law    1
+## supplement                 supplement    1
+## cares                           cares    1
+## schedules                   schedules    1
+## actions                       actions    1
+## government…               government…    1
+## teammates                   teammates    1
+## discrete                     discrete    1
+## engagements               engagements    1
+## larger                         larger    1
+## medium                         medium    1
+## segments                     segments    1
+## sized                           sized    1
+## spreading                   spreading    1
+## checks                         checks    1
+## criminal                     criminal    1
+## requirement               requirement    1
+## standards…                 standards…    1
+## crossfunctional…     crossfunctional…    1
+## pandera                       pandera    1
+## partnering                 partnering    1
+## advisory                     advisory    1
+## unstructured…           unstructured…    1
+## causal                         causal    1
+## assigned                     assigned    1
+## overseeing                 overseeing    1
+## transfer                     transfer    1
+## award                           award    1
+## responsive                 responsive    1
+## sphereoi                     sphereoi    1
+## studio                         studio    1
+## studios                       studios    1
+## winning                       winning    1
+## undergraduate           undergraduate    1
+## newest                         newest    1
+## aggregating               aggregating    1
+## rose                             rose    1
+## adaptation                 adaptation    1
+## recommends                 recommends    1
+## researches                 researches    1
+## assign                         assign    1
+## leader…                       leader…    1
+## customer’s                 customer’s    1
+## customer’s…               customer’s…    1
+## typically                   typically    1
+## begin                           begin    1
+## duration                     duration    1
+## interim                       interim    1
+## maintained                 maintained    1
+## onsite                         onsite    1
+## recognition…             recognition…    1
+## speakers                     speakers    1
+## speech                         speech    1
+## graphical                   graphical    1
+## acceptable                 acceptable    1
+## collecting                 collecting    1
+## biology                       biology    1
+## implements                 implements    1
+## uses…                           uses…    1
+## acceleration             acceleration    1
+## england                       england    1
+## maidap                         maidap    1
+## nerd                             nerd    1
+## soon                             soon    1
+## ifc                               ifc    1
+## among                           among    1
+## prescriptive             prescriptive    1
+## around…                       around…    1
+## devices                       devices    1
+## grade                           grade    1
+## partners                     partners    1
+## profile                       profile    1
+## clinics                       clinics    1
+## pharmacy                     pharmacy    1
+## specialty                   specialty    1
+## states                         states    1
+## united                         united    1
+## walgreens                   walgreens    1
+## exploration…             exploration…    1
+## graphics                     graphics    1
+## macro                           macro    1
+## ods                               ods    1
+## visual                         visual    1
+## modelkmean                 modelkmean    1
+## trainee                       trainee    1
+## recommender               recommender    1
+## customer…                   customer…    1
+## broaden                       broaden    1
+## scored                         scored    1
+## usage                           usage    1
+## document…                   document…    1
+## elicit                         elicit    1
+## head                             head    1
+## communicable             communicable    1
+## disease                       disease    1
+## basket                         basket    1
+## cross…                         cross…    1
+## anomaly                       anomaly    1
+## areas…                         areas…    1
+## geared                         geared    1
+## internship                 internship    1
+## multidimensional     multidimensional    1
+## students                     students    1
+## towards                       towards    1
+## ccss                             ccss    1
+## lesson                         lesson    1
+## mini                             mini    1
+## pages                           pages    1
+## sample                         sample    1
+## commercial                 commercial    1
+## mid                               mid    1
+## portfolio                   portfolio    1
+## contexts                     contexts    1
+## retrieval…                 retrieval…    1
+## causes                         causes    1
+## diving                         diving    1
+## enjoys                         enjoys    1
+## root                             root    1
+## generous                     generous    1
+## loved                           loved    1
+## ones                             ones    1
+## protect                       protect    1
+## rewards                       rewards    1
+## thrift                         thrift    1
+## total                           total    1
+## refe                             refe    1
+## r…                                 r…    1
+## closure                       closure    1
+## per                               per    1
+## exceptional               exceptional    1
+## neuroscience             neuroscience    1
+## arc                               arc    1
+## ndid                             ndid    1
+## thods                           thods    1
+## tion                             tion    1
+## tise                             tise    1
+## conjunction               conjunction    1
+## technologists           technologists    1
+## assess                         assess    1
+## smallscale…               smallscale…    1
+## tables                         tables    1
+## controls                     controls    1
+## petrochemicals         petrochemicals    1
+## refining                     refining    1
+## mix                               mix    1
+## adjacent                     adjacent    1
+## depend                         depend    1
+## involvement               involvement    1
+## seniority                   seniority    1
+## invent                         invent    1
+## participates             participates    1
+## uscs                             uscs    1
+## demonstrate               demonstrate    1
+## power…                         power…    1
+## selfservice               selfservice    1
+## uncovers                     uncovers    1
+## conferences               conferences    1
+## convey                         convey    1
+## documents                   documents    1
+## meetings                     meetings    1
+## preferably                 preferably    1
+## ceos                             ceos    1
+## concierge                   concierge    1
+## fortune                       fortune    1
+## health…                       health…    1
+## layers                         layers    1
+## sell                             sell    1
+## opensource                 opensource    1
+## scikit…                       scikit…    1
+## flow                             flow    1
+## regressions               regressions    1
+## tensor                         tensor    1
+## predicative               predicative    1
+## frequently                 frequently    1
+## investigators…         investigators…    1
+## aviation                     aviation    1
+## conducting                 conducting    1
+## integrated                 integrated    1
+## ways…                           ways…    1
+## weather                       weather    1
+## datasets…                   datasets…    1
+## nontraditional         nontraditional    1
+## traditional               traditional    1
+## uses                             uses    1
+## requests                     requests    1
+## psychology                 psychology    1
+## critical…                   critical…    1
+## easy                             easy    1
+## satisfy                       satisfy    1
+## yet                               yet    1
+## faced                           faced    1
+## people…                       people…    1
+## compelling                 compelling    1
+## stories                       stories    1
+## tell                             tell    1
+## next…                           next…    1
+## monitoring                 monitoring    1
+## import                         import    1
+## nations                       nations    1
+## particular                 particular    1
+## databricks                 databricks    1
+## notebook                     notebook    1
+## efficiently               efficiently    1
+## threads                       threads    1
+## boulder                       boulder    1
+## denver                         denver    1
+## engage                         engage    1
+## itil                             itil    1
+## streamline                 streamline    1
+## surface                       surface    1
+## threats                       threats    1
+## evolving                     evolving    1
+## investigate               investigate    1
+## manipulating             manipulating    1
+## pl…                               pl…    1
+## aims                             aims    1
+## mineral                       mineral    1
+## prospecting               prospecting    1
+## utilise                       utilise    1
+## text…                           text…    1
+## disability                 disability    1
+## options                       options    1
+## short                           short    1
+## stock                           stock    1
+## field…                         field…    1
+## localization             localization    1
+## dss                               dss    1
+## specializes               specializes    1
+## reduce…                       reduce…    1
+## prespecified             prespecified    1
+## domains–ranging       domains–ranging    1
+## predicting                 predicting    1
+## structure                   structure    1
+## formulating               formulating    1
+## sponsor                       sponsor    1
+## sponsors…                   sponsors…    1
+## aster                           aster    1
+## scoping                       scoping    1
+## teradata                     teradata    1
+## agricultural             agricultural    1
+## agriculture               agriculture    1
+## biotech                       biotech    1
+## genetics                     genetics    1
+## segment                       segment    1
+## nfl                               nfl    1
+## player                         player    1
+## accurately                 accurately    1
+## agility                       agility    1
+## ahead                           ahead    1
+## anticipate                 anticipate    1
+## consequences             consequences    1
+## perspective               perspective    1
+## sees                             sees    1
+## encouraged                 encouraged    1
+## covered                       covered    1
+## fully                           fully    1
+## gpus                             gpus    1
+## kpis                             kpis    1
+## abilities                   abilities    1
+## icoa                             icoa    1
+## phases                         phases    1
+## surfacing                   surfacing    1
+## collectors                 collectors    1
+## blend                           blend    1
+## powerful                     powerful    1
+## activities…               activities…    1
+## ford                             ford    1
+## motor                           motor    1
+## fore                             fore    1
+## front                           front    1
+## intricacies               intricacies    1
+## best…                           best…    1
+## documenting               documenting    1
+## submissions               submissions    1
+## issue                           issue    1
+## resolutions               resolutions    1
+## advocate                     advocate    1
+## multivariate             multivariate    1
+## atom                             atom    1
+## contributions           contributions    1
+## supercomputing…       supercomputing…    1
+## workflow                     workflow    1
+## connect                       connect    1
+## manage…                       manage…    1
+## sick                             sick    1
+## sickest                       sickest    1
+## rti                               rti    1
+## emotion                       emotion    1
+## extract…                     extract…    1
+## secondary                   secondary    1
+## forecasting…             forecasting…    1
+## rulesbased                 rulesbased    1
+## statisticallysound statisticallysound    1
+## pentaho                       pentaho    1
+## suite                           suite    1
+## academia                     academia    1
+## history                       history    1
+## settings…                   settings…    1
+## dod                               dod    1
+## navy                             navy    1
+## produce                       produce    1
+## thoughtfulness         thoughtfulness    1
+## gather                         gather    1
+## perform…                     perform…    1
+## xeno                             xeno    1
+## companies…                 companies…    1
+## payers                         payers    1
+## marketbased               marketbased    1
+## heor                             heor    1
+## hpsr                             hpsr    1
+## account                       account    1
+## interacts                   interacts    1
+## significantly           significantly    1
+## partly                         partly    1
+## wholly                         wholly    1
+## lab                               lab    1
+## rd…                               rd…    1
+## analysing                   analysing    1
+## effectiveness           effectiveness    1
+## parsing                       parsing    1
+## comprehensive           comprehensive    1
+## offerings                   offerings    1
+## plans…                         plans…    1
+## profit                         profit    1
+## reimbursement           reimbursement    1
+## tuition                       tuition    1
+## plotly                         plotly    1
+## toolboxes                   toolboxes    1
+## mmp                               mmp    1
+## play                             play    1
+## demography                 demography    1
+## obtaining                   obtaining    1
+## political                   political    1
+## sociology                   sociology    1
+## configure                   configure    1
+## contract…                   contract…    1
+## forms                           forms    1
+## type                             type    1
+## news                             news    1
+## personalization       personalization    1
+## personalized             personalized    1
+## addressing                 addressing    1
+## amount                         amount    1
+## hypothesis                 hypothesis    1
+## draws                           draws    1
+## correlations             correlations    1
+## device                         device    1
+## immense…                     immense…    1
+## wearable                     wearable    1
+## component                   component    1
+## establishing             establishing    1
+## full…                           full…    1
+## revolve                       revolve    1
+## contains                     contains    1
+## apache                         apache    1
+## updates                       updates    1
+## biometrics                 biometrics    1
+## depth…                         depth…    1
+## independently           independently    1
+## fieldsyou                   fieldsyou    1
+## desirable                   desirable    1
+## drive…                         drive…    1
+## reporting…                 reporting…    1
+## billions                     billions    1
+## daily…                         daily…    1
+## impressions               impressions    1
+## intersection             intersection    1
+## collaborates             collaborates    1
+## designers                   designers    1
+## sure                             sure    1
+## notebooks                   notebooks    1
+## issues                         issues    1
+## relevance                   relevance    1
+## wants                           wants    1
+## carlo                           carlo    1
+## monte                           monte    1
+## crossfunctionally   crossfunctionally    1
+## infrastructure…       infrastructure…    1
+## tooling                       tooling    1
+## notch                           notch    1
+## considerable             considerable    1
+## economics…                 economics…    1
+## thorough                     thorough    1
+## contemporary             contemporary    1
+## multimodal…               multimodal…    1
+## augment                       augment    1
+## inception                   inception    1
+## cai                               cai    1
+## capacity                     capacity    1
+## choose                         choose    1
+## frame                           frame    1
+## represent                   represent    1
+## exploitation             exploitation    1
+## types                           types    1
+## acornai’s                   acornai’s    1
+## inferences                 inferences    1
+## trial                           trial    1
+## entrofy                       entrofy    1
+## interview                   interview    1
+## method                         method    1
+## selection                   selection    1
+## comfort                       comfort    1
+## advantages…               advantages…    1
+## authorized                 authorized    1
+## profiling                   profiling    1
+## original                     original    1
+## tax                               tax    1
+## bioinformaticians   bioinformaticians    1
+## clinicians                 clinicians    1
+## analog                         analog    1
+## circuits                     circuits    1
+## hardware                     hardware    1
+## superior                     superior    1
+## long                             long    1
+## roadmaps                     roadmaps    1
+## technical…                 technical…    1
+## determines                 determines    1
+## accomplished             accomplished    1
+## colleagues                 colleagues    1
+## fresh                           fresh    1
+## graduates                   graduates    1
+## series…                       series…    1
+## xgboost                       xgboost    1
+## continue                     continue    1
+## done                             done    1
+## drawing                       drawing    1
+## argo                             argo    1
+## kubeflow                     kubeflow    1
+## test…                           test…    1
+## serving                       serving    1
+## querying                     querying    1
+## description               description    1
+## discount                     discount    1
+## single                         single    1
+## started                       started    1
+## clinically                 clinically    1
+## literature                 literature    1
+## reading                       reading    1
+## subject…                     subject…    1
+## cdc’s                           cdc’s    1
+## division                     division    1
+## fulltime                     fulltime    1
+## hyattsville               hyattsville    1
+## sis                               sis    1
+## digging                       digging    1
+## face                             face    1
+## individually             individually    1
+## interaction               interaction    1
+## trove                           trove    1
+## chosen                         chosen    1
+## breadth                       breadth    1
+## hand                             hand    1
+## determination           determination    1
+## real…                           real…    1
+## ads                               ads    1
+## automated                   automated    1
+## might                           might    1
+## send                             send    1
+## week…                           week…    1
+## next                             next    1
+## pertaining                 pertaining    1
+## prioritize                 prioritize    1
+## propose                       propose    1
+## workstream                 workstream    1
+## tasked                         tasked    1
+## bsc                               bsc    1
+## msc                               msc    1
+## determined                 determined    1
+## essential…                 essential…    1
+## freeportmcmoran       freeportmcmoran    1
+## many                             many    1
+## reviewed                     reviewed    1
+## sites                           sites    1
+## employing                   employing    1
+## internet                     internet    1
+## environment…             environment…    1
+## amway                           amway    1
+## initiatives               initiatives    1
+## primarily                   primarily    1
+## cash                             cash    1
+## ofp                               ofp    1
+## counsel                       counsel    1
+## peers                           peers    1
+## choice                         choice    1
+## correct                       correct    1
+## explanations             explanations    1
+## reasonable                 reasonable    1
+## authorization           authorization    1
+## chargeback                 chargeback    1
+## merchants                   merchants    1
+## output                         output    1
+## tangible                     tangible    1
+## depth                           depth    1
+## example                       example    1
+## finance                       finance    1
+## logistics                   logistics    1
+## fastpaced                   fastpaced    1
+## unlimited                   unlimited    1
+## heliocampus               heliocampus    1
+## institutional           institutional    1
+## questions…                 questions…    1
+## creating…                   creating…    1
+## four                             four    1
+## k–                                 k–    1
+## accessing                   accessing    1
+## handling                     handling    1
+## updating                     updating    1
+## cron                             cron    1
+## konsola                       konsola    1
+## pracy                           pracy    1
+## systemie                     systemie    1
+## umiejętność               umiejętność    1
+## underlying                 underlying    1
+## regression…               regression…    1
+## resolution                 resolution    1
+## adoption                     adoption    1
+## controller’s             controller’s    1
+## evangelize                 evangelize    1
+## immediate                   immediate    1
+## internally                 internally    1
+## laboratory                 laboratory    1
+## personnel                   personnel    1
+## platform…                   platform…    1
+## section                       section    1
+## tsql                             tsql    1
+## tuning                         tuning    1
+## cybersecurity           cybersecurity    1
+## exceptions                 exceptions    1
+## expression                 expression    1
+## impacted                     impacted    1
+## ambulatory                 ambulatory    1
+## namcs                           namcs    1
+## nhams                           nhams    1
+## surveys                       surveys    1
+## defining                     defining    1
+## roadmap                       roadmap    1
+## acquisition               acquisition    1
+## preprocessing           preprocessing    1
+## stage                           stage    1
+## calculus                     calculus    1
+## multivariable           multivariable    1
+## wrangling…                 wrangling…    1
+## joining                       joining    1
+## settings                     settings    1
+## consider                     consider    1
+## however                       however    1
+## probability               probability    1
+## recognition               recognition    1
+## enrichment…               enrichment…    1
+## noaas                           noaas    1
+## premiere                     premiere    1
+## star                             star    1
+## transform…                 transform…    1
+## agencies                     agencies    1
+## avenues                       avenues    1
+## internet…                   internet…    1
+## referrals                   referrals    1
+## ticketmaster             ticketmaster    1
+## gwim                             gwim    1
+## look                             look    1
+## parity                         parity    1
+## reached                       reached    1
+## transaction               transaction    1
+## nvidia                         nvidia    1
+## sdk                               sdk    1
+## rdbms                           rdbms    1
+## automations               automations    1
+## businesses                 businesses    1
+## email                           email    1
+## gives                           gives    1
+## hundreds                     hundreds    1
+## prebuilt                     prebuilt    1
+## sizes                           sizes    1
+## envelope                     envelope    1
+## pushing                       pushing    1
+## security…                   security…    1
+## stochastic                 stochastic    1
+## ueba                             ueba    1
+## context                       context    1
+## examples                     examples    1
+## show                             show    1
+## distribution             distribution    1
+## unlocks                       unlocks    1
+## gdia                             gdia    1
+## highpotential           highpotential    1
+## mobility                     mobility    1
+## vehicle                       vehicle    1
+## vehicles                     vehicles    1
+## kafka                           kafka    1
+## redshift                     redshift    1
+## snowflake                   snowflake    1
+## developed                   developed    1
+## later                           later    1
+## polishing                   polishing    1
+## economists                 economists    1
+## trainers                     trainers    1
+## natural…                     natural…    1
+## sophisticated           sophisticated    1
+## identifies                 identifies    1
+## preprocess                 preprocess    1
+## retrain                       retrain    1
+## empowered                   empowered    1
+## interactions             interactions    1
+## lifestyle                   lifestyle    1
+## mine                             mine    1
+## ask                               ask    1
+## laymans                       laymans    1
+## detailed                     detailed    1
+## assumptions               assumptions    1
+## engagement                 engagement    1
+## milestones                 milestones    1
+## mitigate                     mitigate    1
+## risks…                         risks…    1
+## kmeans                         kmeans    1
+## bonus                           bonus    1
+## equal                           equal    1
+## alteryx                       alteryx    1
+## qlikview                     qlikview    1
+## doświadczenie           doświadczenie    1
+## pakietu                       pakietu    1
+## zaawansowana             zaawansowana    1
+## znajomość                   znajomość    1
+## latest                         latest    1
+## quickly                       quickly    1
+## markdown                     markdown    1
+## preference                 preference    1
+## material                     material    1
+## provided                     provided    1
+## constraints               constraints    1
+## estimates                   estimates    1
+## feasibility               feasibility    1
+## impacts                       impacts    1
+## proposals                   proposals    1
+## soundness                   soundness    1
+## reinforcement           reinforcement    1
+## answered                     answered    1
+## concerns                     concerns    1
+## filtering                   filtering    1
+## industrial                 industrial    1
+## start                           start    1
+## stem                             stem    1
+## accordance                 accordance    1
+## fair…                           fair…    1
+## fulfill                       fulfill    1
+## prototypes                 prototypes    1
+## compute                       compute    1
+## economic                     economic    1
+## estate                         estate    1
+## formula                       formula    1
+## experimenting           experimenting    1
+## advancing                   advancing    1
+## breaking                     breaking    1
+## diversity                   diversity    1
+## ground                         ground    1
+## healing                       healing    1
+## job…                             job…    1
+## made                             made    1
+## personal                     personal    1
+## strength                     strength    1
+## embedded                     embedded    1
+## filter                         filter    1
+## tool                             tool    1
+## document                     document    1
+## summarize                   summarize    1
+## specification           specification    1
+## backtests                   backtests    1
+## demonstrate…             demonstrate…    1
+## reproducible             reproducible    1
+## textual                       textual    1
+## topic                           topic    1
+## utilized                     utilized    1
+## voice…                         voice…    1
+## ecosystem                   ecosystem    1
+## impact…                       impact…    1
+## ranges                         ranges    1
+## kidney                         kidney    1
+## conventional             conventional    1
+## image…                         image…    1
+## registration             registration    1
+## php                               php    1
+## recruiting                 recruiting    1
+## york                             york    1
+## feature…                     feature…    1
+## salaries                     salaries    1
+## vision…                       vision…    1
+## leverages                   leverages    1
+## power                           power    1
+## robotics                     robotics    1
+## vast…                           vast…    1
+## forecasts                   forecasts    1
+## optimized                   optimized    1
+## reduce                         reduce    1
+## doctoral                     doctoral    1
+## chantilly                   chantilly    1
+## chief                           chief    1
+## llc                               llc    1
+## memetics                     memetics    1
+## assets                         assets    1
+## entire…                       entire…    1
+## naturalgas                 naturalgas    1
+## picarro                       picarro    1
+## utility                       utility    1
+## following…                 following…    1
+## behaviors                   behaviors    1
+## covering                     covering    1
+## selfstarter               selfstarter    1
+## applicable…               applicable…    1
+## collections               collections    1
+## fraud                           fraud    1
+## valuations                 valuations    1
+## acceptance                 acceptance    1
+## b…                                 b…    1
+## emrs                             emrs    1
+## operations…               operations…    1
+## claim                           claim    1
+## aipowered                   aipowered    1
+## innovators                 innovators    1
+## investors                   investors    1
+## product—                     product—    1
+## reliable                     reliable    1
+## wissee                         wissee    1
+## leading…                     leading…    1
+## pulling                       pulling    1
+## relational…               relational…    1
+## approved                     approved    1
+## expeditiously           expeditiously    1
+## like…                           like…    1
+## dimensionality         dimensionality    1
+## gan                               gan    1
+## sagemaker                   sagemaker    1
+## bias                             bias    1
+## dimension                   dimension    1
+## foundations               foundations    1
+## trade                           trade    1
+## variance                     variance    1
+## powerpoint                 powerpoint    1
+## bae                               bae    1
+## lightning                   lightning    1
+## web…                             web…    1
+## grasp                           grasp    1
+## coder                           coder    1
+## maintains                   maintains    1
+## visualization…         visualization…    1
+## improving…                 improving…    1
+## mixture                       mixture    1
+## passion                       passion    1
+## learnings                   learnings    1
+## preserving                 preserving    1
+## share                           share    1
+## way                               way    1
+## innovative…               innovative…    1
+## managers                     managers    1
+## tda                               tda    1
+## unify                           unify    1
+## generates                   generates    1
+## units                           units    1
+## warehouses                 warehouses    1
+## machines…                   machines…    1
+## culture                       culture    1
+## fostering                   fostering    1
+## manufacturing           manufacturing    1
+## escalate                     escalate    1
+## loss                             loss    1
+## suspicious                 suspicious    1
+## pull                             pull    1
+## audiences                   audiences    1
+## daily                           daily    1
+## deadlines                   deadlines    1
+## weekly                         weekly    1
+## gbm                               gbm    1
+## advance…                     advance…    1
+## creatively                 creatively    1
+## launching                   launching    1
+## blueshift                   blueshift    1
+## bold                             bold    1
+## self                             self    1
+## unlock                         unlock    1
+## obtain                         obtain    1
+## leadingedge               leadingedge    1
+## wsri                             wsri    1
+## consumer…                   consumer…    1
+## cooks…                         cooks…    1
+## elasticsearch           elasticsearch    1
+## lucene                         lucene    1
+## painless                     painless    1
+## armys                           armys    1
+## national                     national    1
+## commensurate             commensurate    1
+## desire                         desire    1
+## triton                         triton    1
+## cleaned…                     cleaned…    1
+## gathered                     gathered    1
+## thus                             thus    1
+## transformed               transformed    1
+## task                             task    1
+## dimensional               dimensional    1
+## contract                     contract    1
+## gaithersburg             gaithersburg    1
+## sodexo                         sodexo    1
+## fundamental               fundamental    1
+## geosciences               geosciences    1
+## significant…             significant…    1
+## developer                   developer    1
+## platforms…                 platforms…    1
+## constructively         constructively    1
+## consultants               consultants    1
+## continuous                 continuous    1
+## discussing                 discussing    1
+## mckinsey                     mckinsey    1
+## possible                     possible    1
+## search                         search    1
+## selecting                   selecting    1
+## aid                               aid    1
+## bits                             bits    1
+## caci’s                         caci’s    1
+## insightful                 insightful    1
+## sector                         sector    1
+## balance                       balance    1
+## judgment                     judgment    1
+## nosql                           nosql    1
+## probability…             probability…    1
+## foundational             foundational    1
+## pro                               pro    1
+## air                               air    1
+## air…                             air…    1
+## command                       command    1
+## survice                       survice    1
+## mastery                       mastery    1
+## numpy                           numpy    1
+## billerica                   billerica    1
+## boston                         boston    1
+## collaborations         collaborations    1
+## revenue                       revenue    1
+## serves                         serves    1
+## associated                 associated    1
+## configuration           configuration    1
+## control                       control    1
+## performs                     performs    1
+## computer…                   computer…    1
+## explainable               explainable    1
+## focuses                       focuses    1
+## ial                               ial    1
+## interactive               interactive    1
+## assignment                 assignment    1
+## physical                     physical    1
+## beautiful                   beautiful    1
+## love                             love    1
+## welltested                 welltested    1
+## operationalizing     operationalizing    1
+## substantial               substantial    1
+## citizenship               citizenship    1
+## permanent                   permanent    1
+## residency                   residency    1
+## finding                       finding    1
+## haystack                     haystack    1
+## invalidating             invalidating    1
+## needle                         needle    1
+## reviewing                   reviewing    1
+## tactics                       tactics    1
+## journalists               journalists    1
+## aligners                     aligners    1
+## expect                         expect    1
+## intraoral                   intraoral    1
+## invisalign                 invisalign    1
+## itero                           itero    1
+## orthocad                     orthocad    1
+## scanners                     scanners    1
+## cross                           cross    1
+## sparse                         sparse    1
+## posses                         posses    1
+## pleasanton                 pleasanton    1
+## reinsurance               reinsurance    1
+## bay                               bay    1
+## prefer                         prefer    1
+## rapid                           rapid    1
+## approaches…               approaches…    1
+## bringing                     bringing    1
+## joint                           joint    1
+## edge                             edge    1
+## clarifying                 clarifying    1
+## expert…                       expert…    1
+## able…                           able…    1
+## experiment                 experiment    1
+## chemours                     chemours    1
+## enabling                     enabling    1
+## feed                             feed    1
+\end{verbatim}
+
+\hypertarget{visualize-data}{%
+\subsection{Visualize Data}\label{visualize-data}}
+
+By visualizing the relative frequency of skills listed in job summaries
+we can see which are more commonly mentioned in job postings online.
+Python appears to be the number one skill in demand in this dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\KeywordTok{wordcloud}\NormalTok{(}\DataTypeTok{words =}\NormalTok{ d}\OperatorTok{$}\NormalTok{word, }\DataTypeTok{freq=}\NormalTok{d}\OperatorTok{$}\NormalTok{freq, }\DataTypeTok{min.freq =} \DecValTok{50}\NormalTok{, }\DataTypeTok{max.words=}\DecValTok{200}\NormalTok{, }\DataTypeTok{random.order=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{rot.per=}\FloatTok{0.35}\NormalTok{, }\DataTypeTok{colors=}\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{8}\NormalTok{, }\StringTok{"Dark2"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on '…' in
+## 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on '…' in
+## 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on '…' in
+## 'mbcsToSbcs': dot substituted for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : font metrics unknown for Unicode character U+2026
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'servers…' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'servers…' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'servers…' in 'mbcsToSbcs': dot substituted for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'servers…' in 'mbcsToSbcs': dot substituted
+## for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'servers…' in 'mbcsToSbcs': dot substituted
+## for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'servers…' in 'mbcsToSbcs': dot substituted
+## for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : font metrics unknown for Unicode character U+2026
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'strongly…' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'strongly…' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in strwidth(words[i], cex = size[i], ...): conversion failure on
+## 'strongly…' in 'mbcsToSbcs': dot substituted for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'strongly…' in 'mbcsToSbcs': dot substituted
+## for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'strongly…' in 'mbcsToSbcs': dot substituted
+## for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : conversion failure on 'strongly…' in 'mbcsToSbcs': dot substituted
+## for <a6>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in text.default(x1, y1, words[i], cex = size[i], offset = 0, srt =
+## rotWord * : font metrics unknown for Unicode character U+2026
+\end{verbatim}
+
+\includegraphics{Project3_Group_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{barplot}\NormalTok{(d[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]}\OperatorTok{$}\NormalTok{freq, }\DataTypeTok{las =} \DecValTok{2}\NormalTok{, }\DataTypeTok{names.arg =}\NormalTok{ d[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]}\OperatorTok{$}\NormalTok{word,}
+        \DataTypeTok{col =}\StringTok{"lightblue"}\NormalTok{, }\DataTypeTok{main =}\StringTok{"Most frequent words"}\NormalTok{,}
+        \DataTypeTok{ylab =} \StringTok{"Word frequencies"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in axis(if (horiz) 2 else 1, at = at.l, labels = names.arg, lty =
+## axis.lty, : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(if (horiz) 2 else 1, at = at.l, labels = names.arg, lty =
+## axis.lty, : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in axis(if (horiz) 2 else 1, at = at.l, labels = names.arg, lty =
+## axis.lty, : conversion failure on '…' in 'mbcsToSbcs': dot substituted for <a6>
+\end{verbatim}
+
+\includegraphics{Project3_Group_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+Based on the different approaches taken by our team, we have seen a
+variety of different skill sets that are important for a data scientist
+to acquire and develop. While ``soft-skills'' like the ability to
+communicate clearly and navigate working in a collaborative environment
+are extremely in demand, they must be coupled with that ``hard-skills''
+we are all familiar with: programming, data modeling, etc. In pursuit of
+this, there are a myriad of sources from which to draw from in becoming
+a more able practitioner of data science, though perhaps there is no
+better teacher than personal practice in the form of engaging personal
+projects and online learning.
+
+\end{document}
